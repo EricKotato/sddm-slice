@@ -9,8 +9,8 @@ Simple dark SDDM theme.
   * Qt Quick Controls
 2. Install Roboto font
 3. `git clone https://github.com/RadRussianRus/sddm-slice.git`
-4. `cp -r sddm-slice /usr/share/sddm/themes/sddm-slice`
-5. Open `/etc/sddm.conf` and put `Current=sddm-slice` in `[Theme]` section
+4. `cp -r sddm-slice/slice /usr/share/sddm/themes/slice`
+5. Open `/etc/sddm.conf` and put `Current=slice` in `[Theme]` section
 
 ## License
 
