@@ -280,18 +280,4 @@ Item
     Keys.onEnterPressed: pageRoot.sessionSelected()
     Keys.onReturnPressed: pageRoot.sessionSelected()
 
-    MouseArea
-    {
-        id: listMouseArea
-        anchors.fill: parent
-        propagateComposedEvents: true
-        onWheel:
-        {
-            if (wheel.pixelDelta.y < 0)
-                scroll_up()
-            else
-                scroll_down()
-        }
-    }
-
 }

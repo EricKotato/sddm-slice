@@ -272,5 +272,41 @@ Rectangle
             buttonWeekday.updateTime()
         }
     }
+
+    MouseArea
+    {
+        id: scrollMouseArea
+        anchors.fill: parent
+        propagateComposedEvents: true
+        onWheel:
+        {
+            switch (root.state)
+            {
+                case "statePower":
+                    if (wheel.pixelDelta.y < 0)
+                        pagePower.scroll_up()
+                    else
+                        pagePower.scroll_down()
+                    break
+
+                case "stateSessions":
+                    if (wheel.pixelDelta.y < 0)
+                        pageSessions.scroll_up()
+                    else
+                        pageSessions.scroll_down()
+                    break
+
+                case "stateUsers":
+                    if (!pagePower.hasLoginShown)
+                    {
+                        if (wheel.pixelDelta.y < 0)
+                            pageUsers.scroll_up()
+                        else
+                            pageUsers.scroll_down()
+                    }
+                    break
+            }
+        }
+    }
 }
 

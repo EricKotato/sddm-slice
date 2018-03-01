@@ -587,22 +587,5 @@ Item
     Keys.onEnterPressed: select_or_login()
     Keys.onReturnPressed: select_or_login()
     Keys.onEscapePressed: back_to_selection()
-
-    MouseArea
-    {
-        id: listMouseArea
-        anchors.fill: parent
-        propagateComposedEvents: true
-        onWheel:
-        {
-            if (!hasLoginShown)
-            {
-                if (wheel.pixelDelta.y < 0)
-                    scroll_up()
-                else
-                    scroll_down()
-            }
-        }
-    }
-
+    
 }

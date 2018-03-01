@@ -245,18 +245,4 @@ Item
     Keys.onDownPressed: scroll_up()
     Keys.onEnterPressed: execute()
     Keys.onReturnPressed: execute()
-
-    MouseArea
-    {
-        id: listMouseArea
-        anchors.fill: parent
-        propagateComposedEvents: true
-        onWheel:
-        {
-            if (wheel.pixelDelta.y < 0)
-                scroll_up()
-            else
-                scroll_down()
-        }
-    }
 }
