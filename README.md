@@ -14,4 +14,6 @@ Simple dark SDDM theme.
 
 ## License
 
+Icons: [Material Design Icons](https://github.com/Templarian/MaterialDesign)
+
 [![CC-BY-SA](https://i.creativecommons.org/l/by-sa/4.0/88x31.png)](http://creativecommons.org/licenses/by-sa/4.0/)
