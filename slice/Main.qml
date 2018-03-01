@@ -89,7 +89,7 @@ Rectangle
         SlicedButton
         {
             id: buttonPageUsers
-            x: buttonPageSessions.x + buttonPageSessions.widthPartial + 3
+            x: buttonPagePower.x + buttonPagePower.widthPartial + buttonPageSessions.widthPartial + 6
             y: 5
 
             text: pageUsers.currentUserLogin
