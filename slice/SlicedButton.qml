@@ -50,19 +50,19 @@ Item
             PropertyChanges
             {
                 target: buttonBgSliceLeft;
-                bgColor: selected ? "#dddddd" : "#888888"
+                bgColor: selected ? config.color_button_bg_selected : config.color_button_bg_idle
             }
 
             PropertyChanges
             {
                 target: buttonBgCenter;
-                color: selected ? "#dddddd" : "#888888"
+                color: selected ? config.color_button_bg_selected : config.color_button_bg_idle
             }
 
             PropertyChanges
             {
                 target: buttonBgSliceRight;
-                bgColor: selected ? "#dddddd" : "#888888"
+                bgColor: selected ? config.color_button_bg_selected : config.color_button_bg_idle
             }
         },
         State
@@ -71,19 +71,19 @@ Item
             PropertyChanges
             {
                 target: buttonBgSliceLeft;
-                bgColor: selected ? "#cccccc" : "#aaaaaa"
+                bgColor: selected ? config.color_button_bg_selected_hover : config.color_button_bg_hover
             }
 
             PropertyChanges
             {
                 target: buttonBgCenter;
-                color: selected ? "#cccccc" : "#aaaaaa"
+                color: selected ? config.color_button_bg_selected_hover : config.color_button_bg_hover
             }
 
             PropertyChanges
             {
                 target: buttonBgSliceRight;
-                bgColor: selected ? "#cccccc" : "#aaaaaa"
+                bgColor: selected ? config.color_button_bg_selected_hover : config.color_button_bg_hover
             }
         }
     ]
@@ -94,7 +94,7 @@ Item
 
         width: paddingLeft
         height: parent.height
-        property string bgColor: "#888888"
+        property string bgColor: config.color_button_bg_idle
 
         onPaint:
         {
@@ -130,7 +130,7 @@ Item
     Rectangle
     {
         id: buttonBgCenter
-        color: "#888888"
+        color: config.color_button_bg_idle
         x: paddingLeft
         width: buttonText.width
         height: parent.height
@@ -162,7 +162,7 @@ Item
 
         width: paddingRight
         height: parent.height
-        property string bgColor: "#888888"
+        property string bgColor: config.color_button_bg_idle
 
         onPaint:
         {
@@ -196,7 +196,7 @@ Item
         id: buttonText
         x: paddingLeft
         y: paddingTop
-        color: "#1f1f1f"
+        color: config.color_button_text
 
         font
         {

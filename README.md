@@ -18,7 +18,15 @@ Create file `theme.conf.user` in theme folder. See `slice/theme.conf` for refere
 
 ### Available options
 
-* `font` - changes overall font. Defaults to `Roboto`.
+* `font` - overall font. Defaults to `Roboto`.
+* `color_bg` - main background color. Defaults to `#222222`.
+* `color_button_bg_idle` - button background color (in idle state). Defaults to `#888888`.
+* `color_button_bg_hover` - button background color (in hover state). Defaults to `#aaaaaa`.
+* `color_button_bg_selected` - selected button background color (in idle state). Defaults to `#dddddd`.
+* `color_button_bg_selected_hover` - selected button background color (in hover state). Defaults to `#cccccc`.
+* `color_button_text` - button text color (in any state). Defaults to `#1f1f1f`.
+* `color_text` - main text and foreground elements color (such as progress bar and power icons). Defaults to `#dddddd`.
+* `color_placeholder_text` - placeholder text color (in password field). Defaults to `#888888`.
 
 ## License
 

@@ -17,7 +17,7 @@ Item
         id: sessionNameLabel
         anchors.centerIn: parent
         text: sessionName
-        color: "#fff"
+        color: config.color_text
 
         font
         {

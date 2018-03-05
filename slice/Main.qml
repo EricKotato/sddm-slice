@@ -7,7 +7,7 @@ import QtQuick.Controls 1.4
 Rectangle
 {
     id: root
-    color: "#222222"
+    color: config.color_bg
 
     state: "stateUsers"
     states:

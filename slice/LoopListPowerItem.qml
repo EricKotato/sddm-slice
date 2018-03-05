@@ -42,14 +42,14 @@ Item
         id: powerItemIconOverlay
         anchors.fill: powerItemIcon
         source: powerItemIcon
-        color: "#dddddd"
+        color: config.color_text
     }
 
     Label
     {
         id: descriptionLabel
         text: itemRoot.title
-        color: "#fff"
+        color: config.color_text
 
         font
         {

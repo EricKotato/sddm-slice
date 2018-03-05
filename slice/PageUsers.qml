@@ -229,8 +229,8 @@ Item
 
             style: TextFieldStyle
             {
-                textColor: "#dddddd"
-                placeholderTextColor: "#888888"
+                textColor: config.color_text
+                placeholderTextColor: config.color_placeholder_text
                 background: Item { height: 25 }
             }
             
@@ -252,6 +252,7 @@ Item
             width: parent.width
             height: 2
             opacity: hasLoginShown ? 1 : 0
+            color: config.color_text
         }
 
         Rectangle
@@ -262,6 +263,7 @@ Item
             width: parent.width / 5
             height: 2
             opacity: 0
+            color: config.color_text
         }
 
         Rectangle
@@ -272,6 +274,7 @@ Item
             width: 0
             height: 2
             opacity: 0
+            color: config.color_text
         }
 
         SlicedButton
@@ -309,7 +312,7 @@ Item
             y: pageRoot.height / 4.7
             opacity: 0
 
-            color: "#fff"
+            color: config.color_text
 
             font
             {

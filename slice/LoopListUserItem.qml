@@ -28,18 +28,10 @@ Item
         sourceSize.height: 64
     }
 
-    ColorOverlay
-    {
-        id: profilePictureOverlay
-        anchors.fill: profilePicture
-        source: profilePicture
-        color: "#dddddd"
-    }
-
     Label
     {
         text: userName
-        color: "#fff"
+        color: config.color_text
         
         font
         {
@@ -55,7 +47,7 @@ Item
     Label
     {
         text: userLogin
-        color: "#fff"
+        color: config.color_text
         y: userName == "" ? 5 : 36
         font
         {
