@@ -200,7 +200,7 @@ Item
 
         font
         {
-            family: "Roboto"
+            family: config.font
             bold: true
             pointSize: fontSize
             capitalization: Font.AllUppercase

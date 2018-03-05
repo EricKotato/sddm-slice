@@ -9,3 +9,4 @@ Website=https://github.com/RadRussianRus/slice-sddm
 Version=1.0
 MainScript=Main.qml
 TranslationsDirectory=translations
+ConfigFile=theme.conf

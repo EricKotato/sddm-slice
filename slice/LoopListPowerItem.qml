@@ -53,7 +53,7 @@ Item
 
         font
         {
-            family: "Roboto"
+            family: config.font
             pointSize: 28
             bold: true
         }

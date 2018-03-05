@@ -43,7 +43,7 @@ Item
         
         font
         {
-            family: "Roboto"
+            family: config.font
             pointSize: 28
             bold: true
         }
@@ -59,7 +59,7 @@ Item
         y: userName == "" ? 5 : 36
         font
         {
-            family: "Roboto"
+            family: config.font
             pointSize: userName == "" ? 36 : 20
             bold: userName == ""
         }
