@@ -2,6 +2,8 @@
 
 Simple dark SDDM theme.
 
+[![Theme preview (YouTube)](http://img.youtube.com/vi/y2zzlDdJTUU/0.jpg)](https://youtu.be/y2zzlDdJTUU)
+
 ## Installing
 
 1. Install QML modules: 
