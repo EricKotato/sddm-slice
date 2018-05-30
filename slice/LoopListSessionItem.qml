@@ -25,7 +25,16 @@ Item
             bold: true
         }
 
-        x: parent.x
-        y: 0
+        x: parent.x + 10
+        y: 5
+    }
+
+    Rectangle
+    {
+        x: sessionNameLabel.x - 10
+        y: sessionNameLabel.y - 5
+        width: sessionNameLabel.width + 20
+        height: sessionNameLabel.height + 10
+        color: config.color_text_bg
     }
 }

@@ -29,6 +29,10 @@ Create file `theme.conf.user` in theme folder. See `slice/theme.conf` for refere
 * `color_placeholder_text` - placeholder text color (in password field). Defaults to `#888888`.
 * `color_selection_bg` - selected text background color. Defaults to `#555555`.
 * `color_selection_text` - selected text color. Defaults to `#dddddd`.
+* `color_text_bg` - text elements background color. Defaults to `#22ffffff`.
+* `color_icon_bg` - image elements background color. Defaults to `#11ffffff`.
+* `color_error_bg` - error message background color. Defaults to `#11ffffff`.
+* `color_error_text` - error message text color. Defaults to `#dddddd`.
 
 ## License
 

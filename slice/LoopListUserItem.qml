@@ -6,6 +6,7 @@ Item
 {
     id: itemRoot
     opacity: distance
+    width: parent.width
 
     transform: Scale
     {
@@ -23,9 +24,19 @@ Item
     {
         id: profilePicture
         source: userAvatar
-        sourceSize.width: 64
-        sourceSize.height: 64
+        sourceSize.width: 60
+        sourceSize.height: 60
+        x: 4
+        y: 4
     }
+
+    Rectangle
+    {
+        width: 68
+        height: 68
+        color: config.color_icon_bg
+    }
+
 
     Text
     {
@@ -47,7 +58,7 @@ Item
     {
         text: userLogin
         color: config.color_text
-        y: userName == "" ? 5 : 36
+        y: userName == "" ? 8 : 36
         font
         {
             family: config.font
@@ -55,5 +66,14 @@ Item
             bold: userName == ""
         }
         x: 80
+    }
+
+    Rectangle
+    {
+        x: 70
+        y: 0
+        width: parent.width - 70
+        height: 68
+        color: config.color_text_bg
     }
 }

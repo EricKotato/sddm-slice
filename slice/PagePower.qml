@@ -48,7 +48,7 @@ Item
     {
         id: powerListContainer
         anchors.horizontalCenter: parent.horizontalCenter
-        width: 350
+        width: 370
         height: pageRoot.height
 
         property int scrollDuration: 100
@@ -56,12 +56,10 @@ Item
         LoopListPowerItem
         {
             id: powerShutdownButton
-            //y: pageRoot.height / 10
             title: localeText.shutdown
             distance: selectedIndex == 0 ? 1.0 : 0.6
             icon: "icons/power-off.svg"
 
-            //Layout.fillHeight: true
             Layout.alignment: Qt.AlignVCenter
             Layout.minimumHeight: 48
 
@@ -73,12 +71,10 @@ Item
         LoopListPowerItem
         {
             id: powerRebootButton
-            //y: pageRoot.height / 3.7
             title: localeText.reboot
             distance: selectedIndex == 1 ? 1.0 : 0.6
             icon: "icons/reboot.svg"
 
-            //Layout.fillHeight: true
             Layout.alignment: Qt.AlignVCenter
             Layout.minimumHeight: 48
 
@@ -92,12 +88,10 @@ Item
         LoopListPowerItem
         {
             id: powerSuspendButton
-            //y: pageRoot.height / 2.2
             title: qsTr("Suspend")
             distance: selectedIndex == 2 ? 1.0 : 0.6
             icon: "icons/suspend.svg"
 
-            //Layout.fillHeight: true
             Layout.alignment: Qt.AlignVCenter
             Layout.minimumHeight: 48
 
@@ -110,12 +104,10 @@ Item
         LoopListPowerItem
         {
             id: powerHibernateButton
-            //y: pageRoot.height / 1.58
             title: qsTr("Hibernate")
             distance: selectedIndex == 3 ? 1.0 : 0.6
             icon: "icons/hibernate.svg"
 
-            //Layout.fillHeight: true
             Layout.alignment: Qt.AlignVCenter
             Layout.minimumHeight: 48
 
@@ -128,7 +120,6 @@ Item
         LoopListPowerItem
         {
             id: powerHybridSleepButton
-            //y: pageRoot.height / 1.25
             title: qsTr("Hybrid Sleep")
             distance: selectedIndex == 4 ? 1.0 : 0.6
             icon: "icons/hybrid-sleep.svg"

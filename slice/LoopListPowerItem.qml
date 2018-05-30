@@ -1,12 +1,12 @@
 import QtQuick 2.7
 import QtGraphicalEffects 1.0
-import SddmComponents 2.0
 
 Item
 {
     id: itemRoot
     opacity: distance
     property int duration: 100
+    width: parent.width
 
     signal clicked()
     signal entered()
@@ -34,6 +34,8 @@ Item
         source: icon
         sourceSize.width: 48
         sourceSize.height: 48
+        x: 2
+        y: 2
     }
 
     ColorOverlay
@@ -42,6 +44,13 @@ Item
         anchors.fill: powerItemIcon
         source: powerItemIcon
         color: config.color_text
+    }
+
+    Rectangle
+    {
+        width: 52
+        height: 52
+        color: config.color_icon_bg
     }
 
     Text
@@ -57,14 +66,22 @@ Item
             bold: true
         }
 
-        x: 54
+        x: 64
         y: 5
+    }
+
+    Rectangle
+    {
+        x: 54
+        width: parent.width - 54
+        height: 52
+        color: config.color_text_bg
     }
 
     MouseArea
     {
         width: descriptionLabel.x + descriptionLabel.width
-        height: 48
+        height: 52
         hoverEnabled: true
 
         onClicked: itemRoot.clicked()
