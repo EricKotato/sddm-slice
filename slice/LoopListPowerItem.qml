@@ -1,7 +1,6 @@
 import QtQuick 2.7
 import QtGraphicalEffects 1.0
 import SddmComponents 2.0
-import QtQuick.Controls 2.0
 
 Item
 {
@@ -45,7 +44,7 @@ Item
         color: config.color_text
     }
 
-    Label
+    Text
     {
         id: descriptionLabel
         text: itemRoot.title

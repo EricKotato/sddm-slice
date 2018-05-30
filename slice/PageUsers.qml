@@ -1,8 +1,4 @@
 import QtQuick 2.7
-import QtGraphicalEffects 1.0
-import SddmComponents 2.0
-import QtQuick.Controls 1.4
-import QtQuick.Controls.Styles 1.4
 
 Item
 {
@@ -217,22 +213,19 @@ Item
             userAvatar: get_avatar(3)
         }
 
-        TextField
+        TextInput
         {
             id: passwordField
             y: hasLoginShown ? pageRoot.height / 2.3 + 35 : pageRoot.height / 2.3 + 60
             width: parent.width
+            height: 25
             opacity: hasLoginShown ? 1 : 0
+            color: config.color_text
+            selectionColor: config.color_selection_bg
+            selectedTextColor: config.color_selection_text
 
-            placeholderText: localeText.password
             echoMode: TextInput.Password
-
-            style: TextFieldStyle
-            {
-                textColor: config.color_text
-                placeholderTextColor: config.color_placeholder_text
-                background: Item { height: 25 }
-            }
+            clip: true
             
             font
             {
@@ -243,6 +236,26 @@ Item
 
             Component.onCompleted: forceActiveFocus()
 
+        }
+
+        Text
+        {
+            id: passwordFieldPlaceholder
+            x: passwordField.x
+            y: passwordField.y
+            width: passwordField.width
+            opacity: passwordField.text.length > 0 || !hasLoginShown ? 0 : 1
+
+            color: config.color_placeholder_text
+
+            font
+            {
+                family: config.font
+                bold: true
+                pointSize: 18
+            }
+
+            text: localeText.password
         }
 
         Rectangle
@@ -304,7 +317,7 @@ Item
             onClicked: back_to_selection()
         }
 
-        Label
+        Text
         {
             id: errorMessage
             text: localeText.loginFailed
@@ -373,6 +386,7 @@ Item
             NumberAnimation { target: middleItem; property: "y"; to: pageRoot.height / 2.3 - 40; duration: userListContainer.scrollDuration }
 
             NumberAnimation { target: passwordField; property: "opacity"; to: 1; duration: userListContainer.scrollDuration }
+            NumberAnimation { target: passwordFieldPlaceholder; property: "opacity"; to: 1; duration: userListContainer.scrollDuration }
             NumberAnimation { target: progressBar; property: "opacity"; to: 1; duration: userListContainer.scrollDuration }
             NumberAnimation { target: buttonUserBack; property: "opacity"; to: 1; duration: userListContainer.scrollDuration }
             NumberAnimation { target: buttonUserLogin; property: "opacity"; to: 1; duration: userListContainer.scrollDuration }
@@ -400,6 +414,7 @@ Item
             NumberAnimation { target: middleItem; property: "y"; to: pageRoot.height / 2.3; duration: userListContainer.scrollDuration }
 
             NumberAnimation { target: passwordField; property: "opacity"; to: 0; duration: userListContainer.scrollDuration }
+            NumberAnimation { target: passwordFieldPlaceholder; property: "opacity"; to: 0; duration: userListContainer.scrollDuration }
             NumberAnimation { target: progressBar; property: "opacity"; to: 0; duration: userListContainer.scrollDuration }
             NumberAnimation { target: buttonUserBack; property: "opacity"; to: 0; duration: userListContainer.scrollDuration }
             NumberAnimation { target: buttonUserLogin; property: "opacity"; to: 0; duration: userListContainer.scrollDuration }

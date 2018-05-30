@@ -1,7 +1,6 @@
 import QtQuick 2.7
 import QtGraphicalEffects 1.0
 import SddmComponents 2.0
-import QtQuick.Controls 2.0
 
 Item
 {
@@ -28,7 +27,7 @@ Item
         sourceSize.height: 64
     }
 
-    Label
+    Text
     {
         text: userName
         color: config.color_text
@@ -44,7 +43,7 @@ Item
         y: 0
     }
 
-    Label
+    Text
     {
         text: userLogin
         color: config.color_text

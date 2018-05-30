@@ -6,9 +6,7 @@ Simple dark SDDM theme.
 
 ## Installing
 
-1. Install QML modules: 
-  * Qt Graphical Effects
-  * Qt Quick Controls
+1. Install `Qt Graphical Effects` QML module
 2. Install Roboto font (optional, you can change to other font, see below)
 3. `git clone https://github.com/RadRussianRus/sddm-slice.git`
 4. `cp -r sddm-slice/slice /usr/share/sddm/themes/slice`
@@ -29,6 +27,8 @@ Create file `theme.conf.user` in theme folder. See `slice/theme.conf` for refere
 * `color_button_text` - button text color (in any state). Defaults to `#1f1f1f`.
 * `color_text` - main text and foreground elements color (such as progress bar and power icons). Defaults to `#dddddd`.
 * `color_placeholder_text` - placeholder text color (in password field). Defaults to `#888888`.
+* `color_selection_bg` - selected text background color. Defaults to `#555555`.
+* `color_selection_text` - selected text color. Defaults to `#dddddd`.
 
 ## License
 

@@ -1,6 +1,4 @@
 import QtQuick 2.7
-import QtQuick.Controls 1.4
-
 
 Item
 {
@@ -191,7 +189,7 @@ Item
     }
 
 
-    Label
+    Text
     {
         id: buttonText
         x: paddingLeft
