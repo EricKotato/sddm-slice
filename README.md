@@ -19,6 +19,7 @@ Create file `theme.conf.user` in theme folder. See `slice/theme.conf` for refere
 ### Available options
 
 * `font` - overall font. Defaults to `Roboto`.
+* `background` - path to background image. If not set, falls back to `color_bg`. Not set by default.
 * `color_bg` - main background color. Defaults to `#222222`.
 * `color_button_bg_idle` - button background color (in idle state). Defaults to `#888888`.
 * `color_button_bg_hover` - button background color (in hover state). Defaults to `#aaaaaa`.
