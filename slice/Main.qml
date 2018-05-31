@@ -297,6 +297,7 @@ Rectangle
         id: scrollMouseArea
         anchors.fill: parent
         propagateComposedEvents: true
+        enabled: root.state != "stateUsers" || !pageUsers.hasLoginShown
         onWheel:
         {
             switch (root.state)
@@ -316,7 +317,7 @@ Rectangle
                     break
 
                 case "stateUsers":
-                    if (!pagePower.hasLoginShown)
+                    if (!pageUsers.hasLoginShown)
                     {
                         if (wheel.pixelDelta.y < 0)
                             pageUsers.scroll_up()

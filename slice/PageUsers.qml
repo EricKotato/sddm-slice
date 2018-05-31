@@ -226,6 +226,7 @@ Item
 
             echoMode: TextInput.Password
             clip: true
+            selectByMouse: true
             
             font
             {
