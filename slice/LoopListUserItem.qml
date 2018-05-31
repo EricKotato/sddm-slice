@@ -58,7 +58,7 @@ Item
     {
         text: userLogin
         color: config.color_text
-        y: userName == "" ? 8 : 36
+        y: userName == "" ? 6 : 36
         font
         {
             family: config.font
