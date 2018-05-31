@@ -275,7 +275,17 @@ Item
             width: parent.width
             height: 2
             opacity: hasLoginShown ? 1 : 0
-            color: config.color_text
+            color: config.color_progress_bar
+        }
+
+        Rectangle
+        {
+            id: progressBarBg
+            y: progressBar.y
+            width: parent.width
+            height: 2
+            opacity: 0
+            color: config.color_progress_bar_bg
         }
 
         Rectangle
@@ -286,7 +296,7 @@ Item
             width: parent.width / 5
             height: 2
             opacity: 0
-            color: config.color_text
+            color: config.color_progress_bar_slider
         }
 
         Rectangle
@@ -297,7 +307,7 @@ Item
             width: 0
             height: 2
             opacity: 0
-            color: config.color_text
+            color: config.color_progress_bar_slider
         }
 
         SlicedButton
@@ -543,9 +553,10 @@ Item
             NumberAnimation { target: passwordFieldPlaceholder; property: "opacity"; to: 0; duration: userListContainer.scrollDuration }
             NumberAnimation { target: buttonUserBack; property: "opacity"; to: 0; duration: userListContainer.scrollDuration }
             NumberAnimation { target: buttonUserLogin; property: "opacity"; to: 0; duration: userListContainer.scrollDuration }
-            NumberAnimation { target: progressBar; property: "opacity"; to: 0.5; duration: userListContainer.scrollDuration }
+            NumberAnimation { target: progressBar; property: "opacity"; to: 0; duration: userListContainer.scrollDuration }
             NumberAnimation { target: progressBarSlider1; property: "opacity"; to: 1; duration: userListContainer.scrollDuration }
             NumberAnimation { target: progressBarSlider2; property: "opacity"; to: 1; duration: userListContainer.scrollDuration }
+            NumberAnimation { target: progressBarBg; property: "opacity"; to: 1; duration: userListContainer.scrollDuration }
             NumberAnimation { target: middleItem; property: "y"; to: pageRoot.height / 2.3; duration: userListContainer.scrollDuration }
 
         }
@@ -562,6 +573,7 @@ Item
             NumberAnimation { target: progressBar; property: "opacity"; to: 1; duration: userListContainer.scrollDuration }
             NumberAnimation { target: progressBarSlider1; property: "opacity"; to: 0; duration: userListContainer.scrollDuration }
             NumberAnimation { target: progressBarSlider2; property: "opacity"; to: 0; duration: userListContainer.scrollDuration }
+            NumberAnimation { target: progressBarBg; property: "opacity"; to: 0; duration: userListContainer.scrollDuration }
             NumberAnimation { target: middleItem; property: "y"; to: pageRoot.height / 2.3 - 40; duration: userListContainer.scrollDuration }
 
             onStopped:

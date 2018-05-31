@@ -36,6 +36,9 @@ Create file `theme.conf.user` in theme folder. See `slice/theme.conf` for refere
 * `color_icon_bg` - image elements background color. Defaults to `#11ffffff`.
 * `color_error_bg` - error message background color. Defaults to `#11ffffff`.
 * `color_error_text` - error message text color. Defaults to `#dddddd`.
+* `color_progress_bar` - progress bar color. Defaults to `#dddddd`.
+* `color_progress_bar_slider` - progress bar color. Defaults to `#dddddd`.
+* `color_progress_bar_bg` - progress bar background color. Defaults to `#888888`.
 
 ## License
 
