@@ -28,6 +28,8 @@ Create file `theme.conf.user` in theme folder. See `slice/theme.conf` for refere
 * `color_button_text` - button text color (in any state). Defaults to `#1f1f1f`.
 * `color_text` - main text and foreground elements color (such as progress bar and power icons). Defaults to `#dddddd`.
 * `color_placeholder_text` - placeholder text color (in password field). Defaults to `#888888`.
+* `color_input_bg` - input field background color. Defaults to `#22ffffff`.
+* `color_input_text` - input field background color. Defaults to `#dddddd`.
 * `color_selection_bg` - selected text background color. Defaults to `#555555`.
 * `color_selection_text` - selected text color. Defaults to `#dddddd`.
 * `color_text_bg` - text elements background color. Defaults to `#22ffffff`.

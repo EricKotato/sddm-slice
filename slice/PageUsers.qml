@@ -220,7 +220,7 @@ Item
             width: parent.width - 20
             height: 25
             opacity: hasLoginShown ? 1 : 0
-            color: config.color_text
+            color: config.color_input_text
             selectionColor: config.color_selection_bg
             selectedTextColor: config.color_selection_text
 
@@ -264,7 +264,7 @@ Item
             y: hasLoginShown ? pageRoot.height / 2.3 + 30 : pageRoot.height / 2.3 + 55
             width: parent.width
             height: 40
-            color: config.color_text_bg
+            color: config.color_input_bg
             opacity: hasLoginShown ? 1 : 0
         }
 
