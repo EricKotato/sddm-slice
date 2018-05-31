@@ -6,6 +6,7 @@ Rectangle
 {
     id: root
     color: config.color_bg
+    property variant geometry: screenModel.geometry(screenModel.primary)
 
     state: "stateUsers"
     states:
@@ -14,6 +15,8 @@ Rectangle
         {
             name: "statePower"
             
+            PropertyChanges { target: background; x: geometry.x }
+
             PropertyChanges { target: pagePower;    enabled: true ; focus: true ; x: 0 }
             PropertyChanges { target: pageSessions; enabled: false; focus: false; x: areaMain.width }
             PropertyChanges { target: pageUsers;    enabled: false; focus: false; x: areaMain.width * 2 }
@@ -27,6 +30,8 @@ Rectangle
         {
             name: "stateSessions"
 
+            PropertyChanges { target: background; x: geometry.x - 20 }
+
             PropertyChanges { target: pagePower;    enabled: false; focus: false; x: -areaMain.width }
             PropertyChanges { target: pageSessions; enabled: true ; focus: true ; x: 0 }
             PropertyChanges { target: pageUsers;    enabled: false; focus: false; x: areaMain.width }
@@ -39,6 +44,8 @@ Rectangle
         {
             name: "stateUsers"
 
+            PropertyChanges { target: background; x: geometry.x - 40 }
+
             PropertyChanges { target: pagePower;    enabled: false; focus: false; x: -areaMain.width * 2 }
             PropertyChanges { target: pageSessions; enabled: false; focus: false; x: -areaMain.width }
             PropertyChanges { target: pageUsers;    enabled: true ; focus: true ; x: 0 }
@@ -50,6 +57,20 @@ Rectangle
     ]
 
     TextConstants { id: localeText }
+
+    Background
+    {
+        id: background
+        x: geometry.x - 40
+        y: geometry.y
+        width: geometry.width + 40
+        height: geometry.height
+        source: config.background
+        fillMode: Image.PreserveAspectCrop
+        visible: status != Image.Error
+
+        Behavior on x { NumberAnimation { duration: 150 } }
+    }
 
     Item
     {
