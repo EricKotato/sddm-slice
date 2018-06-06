@@ -58,6 +58,24 @@ Rectangle
 
     TextConstants { id: localeText }
 
+    function bgFillMode() {
+
+        switch(config.bg_mode)
+        {
+            case "aspect":
+                return Image.PreserveAspectCrop;
+
+            case "fill":
+                return Image.Stretch;
+
+            case "tile":
+                return Image.Tile;
+
+            default:
+                return Image.Pad;
+        }
+    }
+
     Background
     {
         id: background
@@ -66,7 +84,7 @@ Rectangle
         width: geometry.width + Math.abs(config.parallax_bg_shift*2)
         height: geometry.height
         source: config.background
-        fillMode: Image.PreserveAspectCrop
+        fillMode: bgFillMode()
         visible: status != Image.Error
 
         Behavior on x { NumberAnimation { duration: 150 } }
