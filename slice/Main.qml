@@ -15,7 +15,7 @@ Rectangle
         {
             name: "statePower"
             
-            PropertyChanges { target: background; x: geometry.x }
+            PropertyChanges { target: background; x: (config.parallax_bg_shift < 0 ? geometry.x - Math.abs(config.parallax_bg_shift*2) : geometry.x ) }
 
             PropertyChanges { target: pagePower;    enabled: true ; focus: true ; x: 0 }
             PropertyChanges { target: pageSessions; enabled: false; focus: false; x: areaMain.width }
@@ -30,7 +30,7 @@ Rectangle
         {
             name: "stateSessions"
 
-            PropertyChanges { target: background; x: geometry.x - 20 }
+            PropertyChanges { target: background; x: geometry.x - Math.abs(config.parallax_bg_shift) }
 
             PropertyChanges { target: pagePower;    enabled: false; focus: false; x: -areaMain.width }
             PropertyChanges { target: pageSessions; enabled: true ; focus: true ; x: 0 }
@@ -44,7 +44,7 @@ Rectangle
         {
             name: "stateUsers"
 
-            PropertyChanges { target: background; x: geometry.x - 40 }
+            PropertyChanges { target: background; x: (config.parallax_bg_shift > 0 ? geometry.x - Math.abs(config.parallax_bg_shift*2) : geometry.x )  }
 
             PropertyChanges { target: pagePower;    enabled: false; focus: false; x: -areaMain.width * 2 }
             PropertyChanges { target: pageSessions; enabled: false; focus: false; x: -areaMain.width }
@@ -61,9 +61,9 @@ Rectangle
     Background
     {
         id: background
-        x: geometry.x - 40
+        x: (config.parallax_bg_shift > 0 ? geometry.x - Math.abs(config.parallax_bg_shift*2) : geometry.x )
         y: geometry.y
-        width: geometry.width + 40
+        width: geometry.width + Math.abs(config.parallax_bg_shift*2)
         height: geometry.height
         source: config.background
         fillMode: Image.PreserveAspectCrop
