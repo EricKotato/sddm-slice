@@ -58,6 +58,7 @@ Item
             id: powerShutdownButton
             title: localeText.shutdown
             distance: selectedIndex == 0 ? 1.0 : 0.6
+            hover: selectedIndex == 0
             icon: "icons/power-off.svg"
 
             Layout.alignment: Qt.AlignVCenter
@@ -73,6 +74,7 @@ Item
             id: powerRebootButton
             title: localeText.reboot
             distance: selectedIndex == 1 ? 1.0 : 0.6
+            hover: selectedIndex == 1
             icon: "icons/reboot.svg"
 
             Layout.alignment: Qt.AlignVCenter
@@ -90,6 +92,7 @@ Item
             id: powerSuspendButton
             title: qsTr("Suspend")
             distance: selectedIndex == 2 ? 1.0 : 0.6
+            hover: selectedIndex == 2
             icon: "icons/suspend.svg"
 
             Layout.alignment: Qt.AlignVCenter
@@ -106,6 +109,7 @@ Item
             id: powerHibernateButton
             title: qsTr("Hibernate")
             distance: selectedIndex == 3 ? 1.0 : 0.6
+            hover: selectedIndex == 3
             icon: "icons/hibernate.svg"
 
             Layout.alignment: Qt.AlignVCenter
@@ -122,6 +126,7 @@ Item
             id: powerHybridSleepButton
             title: qsTr("Hybrid Sleep")
             distance: selectedIndex == 4 ? 1.0 : 0.6
+            hover: selectedIndex == 4
             icon: "icons/hybrid-sleep.svg"
 
             //Layout.fillHeight: true

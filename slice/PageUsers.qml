@@ -82,64 +82,75 @@ Item
         MouseArea
         {
             id: topFarItemMouseArea
+            onEntered: { topFarItem.hover = true }
+            onExited: { topFarItem.hover = false }
             hoverEnabled: true
             width: parent.width
             height: pageRoot.height / 6
-            enabled: !hasLoginShown
+            //enabled: !hasLoginShown
 
-            onClicked: { scrollRepeat = 1; scroll_down(); }
+            onClicked: { if (!hasLoginShown) { scrollRepeat = 1; scroll_down(); } }
 
         }
 
         MouseArea
         {
             id: topMidItemMouseArea
+            onEntered: { topMidItem.hover = true }
+            onExited: { topMidItem.hover = false }
             y: topFarItemMouseArea.height
             hoverEnabled: true
             width: parent.width
             height: pageRoot.height / 5
-            enabled: !hasLoginShown
+            propagateComposedEvents: true
+            //enabled: !hasLoginShown
 
-            onClicked: scroll_down()
+            onClicked: { if (!hasLoginShown) { scroll_down(); } }
 
         }
 
         MouseArea
         {
             id: middleItemMouseArea
-            y: topMidItemMouseArea.y + topMidItemMouseArea.height
+            onEntered: { middleItem.hover = true }
+            onExited: { middleItem.hover = false }
+            y: topMidItemMouseArea.y + topMidItemMouseArea.height - (hasLoginShown ? 60 : 0)
             hoverEnabled: true
             width: parent.width
             height: pageRoot.height / 4
-            enabled: !hasLoginShown
+            //enabled: !hasLoginShown
 
-            onClicked: select_or_login()
+            onClicked: { (hasLoginShown ? back_to_selection() : select_or_login()) } 
 
         }
 
         MouseArea
         {
             id: botMidItemMouseArea
+            onEntered: { botMidItem.hover = true }
+            onExited: { botMidItem.hover = false }
             y: middleItemMouseArea.y + middleItemMouseArea.height
             hoverEnabled: true
             width: parent.width
             height: pageRoot.height / 5
-            enabled: !hasLoginShown
+            //enabled: !hasLoginShown
 
-            onClicked: scroll_up()
+            onClicked: { if (!hasLoginShown) { scroll_up(); } }
 
         }
 
         MouseArea
         {
             id: botFarItemMouseArea
+            onEntered: { botFarItem.hover = true }
+            onExited: { botFarItem.hover = false }
             y: botMidItemMouseArea.y + botMidItemMouseArea.height
             hoverEnabled: true
             width: parent.width
             height: pageRoot.height / 6
-            enabled: !hasLoginShown
+            //enabled: !hasLoginShown
 
-            onClicked: { scrollRepeat = 1; scroll_up(); }
+            onClicked: { if (!hasLoginShown) { scrollRepeat = 1; scroll_up(); } }
 
         }
 
@@ -220,9 +231,9 @@ Item
             width: parent.width - 20
             height: 25
             opacity: hasLoginShown ? 1 : 0
-            color: config.color_input_text
-            selectionColor: config.color_selection_bg
-            selectedTextColor: config.color_selection_text
+            color: colors.inputText
+            selectionColor: colors.inputSelectionBg
+            selectedTextColor: colors.inputSelectionText
 
             echoMode: TextInput.Password
             clip: true
@@ -248,7 +259,7 @@ Item
             opacity: hasLoginShown ? 1 : 0
             visible: passwordField.text.length <= 0
 
-            color: config.color_placeholder_text
+            color: colors.inputPlaceholderText
 
             font
             {
@@ -265,8 +276,8 @@ Item
             y: hasLoginShown ? pageRoot.height / 2.3 + 30 : pageRoot.height / 2.3 + 55
             width: parent.width
             height: 40
-            color: config.color_input_bg
             opacity: hasLoginShown ? 1 : 0
+            color: colors.inputBg
         }
 
         Rectangle
@@ -276,7 +287,7 @@ Item
             width: parent.width
             height: 2
             opacity: hasLoginShown ? 1 : 0
-            color: config.color_progress_bar
+            color: colors.progressBar
         }
 
         Rectangle
@@ -286,7 +297,7 @@ Item
             width: parent.width
             height: 2
             opacity: 0
-            color: config.color_progress_bar_bg
+            color: colors.progressBarBg
         }
 
         Rectangle
@@ -297,7 +308,7 @@ Item
             width: parent.width / 5
             height: 2
             opacity: 0
-            color: config.color_progress_bar_slider
+            color: colors.progressBarSlider
         }
 
         Rectangle
@@ -308,7 +319,7 @@ Item
             width: 0
             height: 2
             opacity: 0
-            color: config.color_progress_bar_slider
+            color: colors.progressBarSlider
         }
 
         SlicedButton
@@ -317,7 +328,7 @@ Item
             x: userListContainer.width - widthFull
             y: hasLoginShown ? pageRoot.height / 2.3 + 74 : pageRoot.height / 2.3 + 109
             paddingTop: 2
-            selected: true
+            highlighted: true
             opacity: hasLoginShown ? 1 : 0
 
             text: localeText.login
@@ -346,7 +357,7 @@ Item
             y: pageRoot.height / 4.7
             opacity: 0
 
-            color: config.color_error_text
+            color: colors.errorText
 
             font
             {
@@ -366,7 +377,7 @@ Item
             y: errorMessage.y - 5
             width: errorMessage.width + 20
             height: errorMessage.height + 10
-            color: config.color_error_bg
+            color: colors.errorBg
             opacity: 0
 
             Behavior on opacity { NumberAnimation { duration: userListContainer.scrollDuration } }
@@ -624,6 +635,7 @@ Item
     {
         if (hasLoginShown)
         {
+            middleItem.hoverEnabled = false
             errorMessage.opacity = 0
             errorMessageBg.opacity = 0
             pageRoot.lockNav()
@@ -634,6 +646,11 @@ Item
         }
         else
         {
+            topFarItem.hoverEnabled = false
+            topMidItem.hoverEnabled = false
+            middleItem.hoverEnabled = true
+            botMidItem.hoverEnabled = false
+            botFarItem.hoverEnabled = false
             userListHideOther.start()
         }
     }
@@ -642,6 +659,11 @@ Item
     {
         if (hasLoginShown)
         {
+            topFarItem.hoverEnabled = true
+            topMidItem.hoverEnabled = true
+            middleItem.hoverEnabled = true
+            botMidItem.hoverEnabled = true
+            botFarItem.hoverEnabled = true
             userListShowOther.start()
             errorMessage.opacity = 0
             errorMessageBg.opacity = 0

@@ -5,7 +5,7 @@ import SddmComponents 2.0
 Rectangle
 {
     id: root
-    color: config.color_bg
+    color: colors.background
     property variant geometry: screenModel.geometry(screenModel.primary)
 
     state: "stateUsers"
@@ -21,9 +21,9 @@ Rectangle
             PropertyChanges { target: pageSessions; enabled: false; focus: false; x: areaMain.width }
             PropertyChanges { target: pageUsers;    enabled: false; focus: false; x: areaMain.width * 2 }
 
-            PropertyChanges { target: buttonPagePower;    selected: true  }
-            PropertyChanges { target: buttonPageSessions; selected: false }
-            PropertyChanges { target: buttonPageUsers;    selected: false }
+            PropertyChanges { target: buttonPagePower;    highlighted: true  }
+            PropertyChanges { target: buttonPageSessions; highlighted: false }
+            PropertyChanges { target: buttonPageUsers;    highlighted: false }
 
         },
         State
@@ -36,9 +36,9 @@ Rectangle
             PropertyChanges { target: pageSessions; enabled: true ; focus: true ; x: 0 }
             PropertyChanges { target: pageUsers;    enabled: false; focus: false; x: areaMain.width }
 
-            PropertyChanges { target: buttonPagePower;    selected: false }
-            PropertyChanges { target: buttonPageSessions; selected: true  }
-            PropertyChanges { target: buttonPageUsers;    selected: false }
+            PropertyChanges { target: buttonPagePower;    highlighted: false }
+            PropertyChanges { target: buttonPageSessions; highlighted: true  }
+            PropertyChanges { target: buttonPageUsers;    highlighted: false }
         },
         State
         {
@@ -50,9 +50,9 @@ Rectangle
             PropertyChanges { target: pageSessions; enabled: false; focus: false; x: -areaMain.width }
             PropertyChanges { target: pageUsers;    enabled: true ; focus: true ; x: 0 }
 
-            PropertyChanges { target: buttonPagePower;    selected: false }
-            PropertyChanges { target: buttonPageSessions; selected: false }
-            PropertyChanges { target: buttonPageUsers;    selected: true  }
+            PropertyChanges { target: buttonPagePower;    highlighted: false }
+            PropertyChanges { target: buttonPageSessions; highlighted: false }
+            PropertyChanges { target: buttonPageUsers;    highlighted: true  }
         }
     ]
 
@@ -89,6 +89,8 @@ Rectangle
 
         Behavior on x { NumberAnimation { duration: 150 } }
     }
+
+    ColorScheme { id: colors }
 
     Item
     {
@@ -215,7 +217,7 @@ Rectangle
 
             hasLeftSlice: false
             text: "Caps Lock"
-            selected: keyboard.capsLock
+            highlighted: keyboard.capsLock
 
             onClicked: keyboard.capsLock = !keyboard.capsLock
         }
@@ -227,7 +229,7 @@ Rectangle
             y: 5
 
             text: "Num Lock"
-            selected: keyboard.numLock
+            highlighted: keyboard.numLock
 
             onClicked: keyboard.numLock = !keyboard.numLock
         }

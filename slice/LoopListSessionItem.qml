@@ -10,13 +10,14 @@ Item
 
     property real distance: 1.0
     property string sessionName: ""
+    property bool hover: false
 
     Text
     {
         id: sessionNameLabel
         anchors.centerIn: parent
         text: sessionName
-        color: config.color_text
+        color: ( hover ? colors.textHover : colors.text )
 
         font
         {
@@ -35,6 +36,6 @@ Item
         y: sessionNameLabel.y - 5
         width: sessionNameLabel.width + 20
         height: sessionNameLabel.height + 10
-        color: config.color_text_bg
+        color: ( hover ? colors.textBgHover : colors.textBg )
     }
 }

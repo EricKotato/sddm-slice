@@ -11,7 +11,7 @@ Item
     property bool hasLeftSlice: true
     property bool hasRightSlice: true
 
-    property bool selected: false
+    property bool highlighted: false
     readonly property int skew: 15
 
     readonly property int paddingLeft: hasLeftSlice ? skew : 5
@@ -21,6 +21,19 @@ Item
     readonly property int widthFull: buttonText.width + paddingLeft + paddingRight
     readonly property int widthPartial: buttonText.width + paddingLeft
 
+    property color bgIdle: colors.buttonBg
+    property color bgHover: colors.buttonBgHover
+
+    property color bgIdleHighlighted: colors.buttonBgHighlighted
+    property color bgHoverHighlighted: colors.buttonBgHoverHighlighted
+
+    property color textIdle: colors.buttonText
+    property color textHover: colors.buttonTextHover
+
+    property color textIdleHighlighted: colors.buttonTextHighlighted
+    property color textHoverHighlighted: colors.buttonTextHoverHighlighted
+
+
     signal clicked()
 
     Behavior on x
@@ -28,7 +41,7 @@ Item
         PropertyAnimation { duration: 100 }
     }
 
-    onSelectedChanged:
+    onHighlightedChanged:
     {
         buttonBgSliceLeft.requestPaint()
         buttonBgSliceRight.requestPaint()
@@ -48,19 +61,25 @@ Item
             PropertyChanges
             {
                 target: buttonBgSliceLeft;
-                bgColor: selected ? config.color_button_bg_selected : config.color_button_bg_idle
+                bgColor: highlighted ? bgIdleHighlighted : bgIdle
             }
 
             PropertyChanges
             {
                 target: buttonBgCenter;
-                color: selected ? config.color_button_bg_selected : config.color_button_bg_idle
+                color: highlighted ? bgIdleHighlighted : bgIdle
             }
 
             PropertyChanges
             {
                 target: buttonBgSliceRight;
-                bgColor: selected ? config.color_button_bg_selected : config.color_button_bg_idle
+                bgColor: highlighted ? bgIdleHighlighted : bgIdle
+            }
+
+            PropertyChanges
+            {
+                target: buttonText;
+                color: highlighted ? textIdleHighlighted : textIdle
             }
         },
         State
@@ -69,19 +88,25 @@ Item
             PropertyChanges
             {
                 target: buttonBgSliceLeft;
-                bgColor: selected ? config.color_button_bg_selected_hover : config.color_button_bg_hover
+                bgColor: highlighted ? bgHoverHighlighted : bgHover
             }
 
             PropertyChanges
             {
                 target: buttonBgCenter;
-                color: selected ? config.color_button_bg_selected_hover : config.color_button_bg_hover
+                color: highlighted ? bgHoverHighlighted : bgHover
             }
 
             PropertyChanges
             {
                 target: buttonBgSliceRight;
-                bgColor: selected ? config.color_button_bg_selected_hover : config.color_button_bg_hover
+                bgColor: highlighted ? bgHoverHighlighted : bgHover
+            }
+
+            PropertyChanges
+            {
+                target: buttonText;
+                color: highlighted ? textHoverHighlighted : textHover
             }
         }
     ]
@@ -92,7 +117,7 @@ Item
 
         width: paddingLeft
         height: parent.height
-        property string bgColor: config.color_button_bg_idle
+        property string bgColor: colors.buttonBg
 
         onPaint:
         {
@@ -128,7 +153,7 @@ Item
     Rectangle
     {
         id: buttonBgCenter
-        color: config.color_button_bg_idle
+        color: colors.buttonBg
         x: paddingLeft
         width: buttonText.width
         height: parent.height
@@ -160,7 +185,7 @@ Item
 
         width: paddingRight
         height: parent.height
-        property string bgColor: config.color_button_bg_idle
+        property string bgColor: colors.buttonBg
 
         onPaint:
         {
@@ -194,7 +219,7 @@ Item
         id: buttonText
         x: paddingLeft
         y: paddingTop
-        color: config.color_button_text
+        color: colors.buttonText
 
         font
         {

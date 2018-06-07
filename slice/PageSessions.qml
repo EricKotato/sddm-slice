@@ -44,6 +44,8 @@ Item
         MouseArea
         {
             id: topFarItemMouseArea
+            onEntered: { topFarItem.hover = true }
+            onExited: { topFarItem.hover = false }
             hoverEnabled: true
             x: -225
             width: 450
@@ -56,6 +58,8 @@ Item
         MouseArea
         {
             id: topMidItemMouseArea
+            onEntered: { topMidItem.hover = true }
+            onExited: { topMidItem.hover = false }
             y: topFarItemMouseArea.height
             hoverEnabled: true
             x: -225
@@ -69,6 +73,8 @@ Item
         MouseArea
         {
             id: middleItemMouseArea
+            onEntered: { middleItem.hover = true }
+            onExited: { middleItem.hover = false }
             y: topMidItemMouseArea.y + topMidItemMouseArea.height
             hoverEnabled: true
             x: -225
@@ -82,6 +88,8 @@ Item
         MouseArea
         {
             id: botMidItemMouseArea
+            onEntered: { botMidItem.hover = true }
+            onExited: { botMidItem.hover = false }
             y: middleItemMouseArea.y + middleItemMouseArea.height
             hoverEnabled: true
             x: -225
@@ -95,6 +103,8 @@ Item
         MouseArea
         {
             id: botFarItemMouseArea
+            onEntered: { botFarItem.hover = true }
+            onExited: { botFarItem.hover = false }
             y: botMidItemMouseArea.y + botMidItemMouseArea.height
             hoverEnabled: true
             x: -225

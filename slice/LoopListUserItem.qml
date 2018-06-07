@@ -7,6 +7,9 @@ Item
     id: itemRoot
     opacity: distance
     width: parent.width
+    
+    property bool hover: false
+    property bool hoverEnabled: true
 
     transform: Scale
     {
@@ -34,14 +37,14 @@ Item
     {
         width: 68
         height: 68
-        color: config.color_icon_bg
+        color: ( hoverEnabled && hover ? colors.iconBgHover : colors.iconBg )
     }
 
 
     Text
     {
         text: userName
-        color: config.color_text
+        color: ( hoverEnabled && hover ? colors.textHover : colors.text )
         
         font
         {
@@ -57,7 +60,7 @@ Item
     Text
     {
         text: userLogin
-        color: config.color_text
+        color: ( hoverEnabled && hover ? (userName == "" ? colors.textHover : colors.textDimmedHover ) : (userName == "" ? colors.text : colors.textDimmed ) )
         y: userName == "" ? 6 : 36
         font
         {
@@ -74,6 +77,6 @@ Item
         y: 0
         width: parent.width - 70
         height: 68
-        color: config.color_text_bg
+        color: ( hoverEnabled && hover ? colors.textBgHover : colors.textBg )
     }
 }

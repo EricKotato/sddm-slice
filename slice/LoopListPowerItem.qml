@@ -7,6 +7,7 @@ Item
     opacity: distance
     property int duration: 100
     width: parent.width
+    property bool hover: false
 
     signal clicked()
     signal entered()
@@ -43,21 +44,21 @@ Item
         id: powerItemIconOverlay
         anchors.fill: powerItemIcon
         source: powerItemIcon
-        color: config.color_text
+        color: ( hover ? colors.iconHover : colors.icon )
     }
 
     Rectangle
     {
         width: 52
         height: 52
-        color: config.color_icon_bg
+        color: ( hover ? colors.iconBgHover : colors.iconBg )
     }
 
     Text
     {
         id: descriptionLabel
         text: itemRoot.title
-        color: config.color_text
+        color: ( hover ? colors.textHover : colors.text )
 
         font
         {
@@ -75,7 +76,7 @@ Item
         x: 54
         width: parent.width - 54
         height: 52
-        color: config.color_text_bg
+        color: ( hover ? colors.textBgHover : colors.textBg )
     }
 
     MouseArea
