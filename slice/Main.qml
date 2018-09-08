@@ -56,7 +56,22 @@ Rectangle
         }
     ]
 
+    function bool(str) {
+        if (str === null || str === undefined)
+            return false;
+
+        str = str.toLowerCase();
+
+        if (str === "false" || str === "no")
+            return false;
+        else if (str === "true" || str === "yes")
+            return true;
+
+        return Boolean(Number(str).valueOf()).valueOf();
+    }
+
     TextConstants { id: localeText }
+    Debug { id: debug }
 
     function bgFillMode() {
 
@@ -107,9 +122,9 @@ Rectangle
             y: 5
 
             hasLeftSlice: false
-            text: sddm.hostName ? sddm.hostName : "Hostname"
+            text: debug.hostName ? debug.hostName : "Hostname"
 
-            enabled: sddm.canPowerOff || sddm.canReboot || sddm.canSuspend || sddm.canHibernate || sddm.canHybridSleep
+            enabled: debug.canPowerOff || debug.canReboot || debug.canSuspend || debug.canHibernate || debug.canHybridSleep
 
             onClicked: if (enabled) root.state = "statePower"
         }

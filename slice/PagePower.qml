@@ -10,11 +10,11 @@ Item
 
     property int selectedIndex:
     {
-        if (sddm.canPowerOff) return 0
-        else if (sddm.canReboot) return 1
-        else if (sddm.canSuspend) return 2
-        else if (sddm.canHibernate) return 3
-        else if (sddm.canHybridSleep) return 4
+        if (debug.canPowerOff) return 0
+        else if (debug.canReboot) return 1
+        else if (debug.canSuspend) return 2
+        else if (debug.canHibernate) return 3
+        else if (debug.canHybridSleep) return 4
         else return 0
     }
 
@@ -64,7 +64,7 @@ Item
             Layout.alignment: Qt.AlignVCenter
             Layout.minimumHeight: 48
 
-            visible: sddm.canPowerOff
+            visible: debug.canPowerOff
             onEntered: selectedIndex = 0
             onClicked: { selectedIndex = 0; execute() }
         }
@@ -80,7 +80,7 @@ Item
             Layout.alignment: Qt.AlignVCenter
             Layout.minimumHeight: 48
 
-            visible: sddm.canReboot
+            visible: debug.canReboot
 
             onEntered: selectedIndex = 1
             onClicked: { selectedIndex = 1; execute() }
@@ -98,7 +98,7 @@ Item
             Layout.alignment: Qt.AlignVCenter
             Layout.minimumHeight: 48
 
-            visible: sddm.canSuspend
+            visible: debug.canSuspend
 
             onEntered: selectedIndex = 2
             onClicked: { selectedIndex = 2; execute() }
@@ -115,7 +115,7 @@ Item
             Layout.alignment: Qt.AlignVCenter
             Layout.minimumHeight: 48
 
-            visible: sddm.canHibernate
+            visible: debug.canHibernate
 
             onEntered: selectedIndex = 3
             onClicked: { selectedIndex = 3; execute() }
@@ -133,7 +133,7 @@ Item
             Layout.alignment: Qt.AlignVCenter
             Layout.minimumHeight: 48
 
-            visible: sddm.canHybridSleep
+            visible: debug.canHybridSleep
 
             onEntered: selectedIndex = 4
             onClicked: { selectedIndex = 4; execute() }
@@ -168,23 +168,23 @@ Item
             switch (result)
             {
                 case 0:
-                    if (sddm.canPowerOff) actionFound = true
+                    if (debug.canPowerOff) actionFound = true
                     break
 
                 case 1:
-                    if (sddm.canReboot) actionFound = true
+                    if (debug.canReboot) actionFound = true
                     break
 
                 case 2:
-                    if (sddm.canSuspend) actionFound = true
+                    if (debug.canSuspend) actionFound = true
                     break
 
                 case 3:
-                    if (sddm.canHibernate) actionFound = true
+                    if (debug.canHibernate) actionFound = true
                     break
 
                 case 4:
-                    if (sddm.canHybridSleep) actionFound = true
+                    if (debug.canHybridSleep) actionFound = true
                     break
             }
 
@@ -211,23 +211,23 @@ Item
             switch (result)
             {
                 case 0:
-                    if (sddm.canPowerOff) actionFound = true
+                    if (debug.canPowerOff) actionFound = true
                     break
 
                 case 1:
-                    if (sddm.canReboot) actionFound = true
+                    if (debug.canReboot) actionFound = true
                     break
 
                 case 2:
-                    if (sddm.canSuspend) actionFound = true
+                    if (debug.canSuspend) actionFound = true
                     break
 
                 case 3:
-                    if (sddm.canHibernate) actionFound = true
+                    if (debug.canHibernate) actionFound = true
                     break
 
                 case 4:
-                    if (sddm.canHybridSleep) actionFound = true
+                    if (debug.canHybridSleep) actionFound = true
                     break
             }
 

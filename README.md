@@ -23,6 +23,26 @@ Create file `theme.conf.user` in theme folder. See `slice/theme.conf` for refere
 * `bg_mode` - background image fill mode. Can be either `aspect`, `fill`, `tile` or `none`. Defaults to `aspect`.
 * `parallax_bg_shift` - shifting of parallax background on tab change in pixels. `0` disables parallax motion. Negative values will scroll background in opposite direction. Default is `20`.
 
+### Debug mode options
+
+Since "Power" screen can't be viewed in greeter because it depends on `sddm.*` properties, there is a debug mode.
+
+#### Boolean options
+
+> You can use "0/1", "true/false" and "yes/no" on boolean options. All debug options are disabled by default.
+
+* `debug` - activates debug mode.
+* `debug_can_power_off` - sets `sddm.canPowerOff` (shows "Shutdown").
+* `debug_can_reboot` - sets `sddm.canReboot` (shows "Reboot").
+* `debug_can_suspend` - sets `sddm.canSuspend` (shows "Suspend").
+* `debug_can_hibernate` - sets `sddm.canHibernate` (shows "Hibernate").
+* `debug_can_hybrid_sleep` - sets `sddm.canHybridSleep` (shows "Hybrid Sleep").
+
+#### String options
+
+* `debug_hostname` - sets `sddm.hostName`.
+
+
 ### Color scheme
 
 There are many color options. In fact, too many. So now they are grouped by layers in [color scheme](https://github.com/RadRussianRus/sddm-slice/wiki/Color-scheme). Most of them are optional, only mandatory options are from [layer 1](https://github.com/RadRussianRus/sddm-slice/wiki/Layer-1):
