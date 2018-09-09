@@ -239,12 +239,7 @@ Item
             clip: true
             selectByMouse: true
             
-            font
-            {
-                family: config.font
-                bold: true
-                pointSize: 18
-            }
+            font: fonts.input
 
             Component.onCompleted: forceActiveFocus()
 
@@ -261,12 +256,7 @@ Item
 
             color: colors.inputPlaceholderText
 
-            font
-            {
-                family: config.font
-                bold: true
-                pointSize: 18
-            }
+            font: fonts.placeholder
 
             text: localeText.password
         }
@@ -334,6 +324,8 @@ Item
             text: localeText.login
 
             onClicked: select_or_login()
+
+            font: fonts.slicesLoginButtons
         }
 
         SlicedButton
@@ -347,6 +339,8 @@ Item
             text: qsTr("Back")
 
             onClicked: back_to_selection()
+
+            font: fonts.slicesLoginButtons
         }
 
         Text
@@ -359,12 +353,7 @@ Item
 
             color: colors.errorText
 
-            font
-            {
-                family: config.font
-                bold: true
-                pointSize: 18
-            }
+            font: fonts.error
 
             Behavior on opacity { NumberAnimation { duration: userListContainer.scrollDuration } }
 

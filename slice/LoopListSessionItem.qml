@@ -19,12 +19,7 @@ Item
         text: sessionName
         color: ( hover ? colors.textHover : colors.text )
 
-        font
-        {
-            family: config.font
-            pointSize: 28
-            bold: true
-        }
+        font: fonts.listItemMed
 
         x: parent.x + 10
         y: 5

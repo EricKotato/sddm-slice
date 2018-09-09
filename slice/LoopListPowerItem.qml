@@ -60,12 +60,7 @@ Item
         text: itemRoot.title
         color: ( hover ? colors.textHover : colors.text )
 
-        font
-        {
-            family: config.font
-            pointSize: 28
-            bold: true
-        }
+        font: fonts.listItemMed
 
         x: 64
         y: 5

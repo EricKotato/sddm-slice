@@ -46,12 +46,7 @@ Item
         text: userName
         color: ( hoverEnabled && hover ? colors.textHover : colors.text )
         
-        font
-        {
-            family: config.font
-            pointSize: 28
-            bold: true
-        }
+        font: fonts.listItemMed
 
         x: 80
         y: 0
@@ -62,12 +57,7 @@ Item
         text: userLogin
         color: ( hoverEnabled && hover ? (userName == "" ? colors.textHover : colors.textDimmedHover ) : (userName == "" ? colors.text : colors.textDimmed ) )
         y: userName == "" ? 6 : 36
-        font
-        {
-            family: config.font
-            pointSize: userName == "" ? 36 : 20
-            bold: userName == ""
-        }
+        font: userName == "" ? fonts.listItemBig : fonts.listItemSub
         x: 80
     }
 

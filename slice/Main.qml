@@ -70,6 +70,10 @@ Rectangle
         return Boolean(Number(str).valueOf()).valueOf();
     }
 
+    function not_null(str) {
+        return !(str === null || str === undefined);
+    }
+
     TextConstants { id: localeText }
     Debug { id: debug }
 
@@ -106,6 +110,7 @@ Rectangle
     }
 
     ColorScheme { id: colors }
+    FontScheme { id: fonts }
 
     Item
     {
@@ -127,6 +132,8 @@ Rectangle
             enabled: debug.canPowerOff || debug.canReboot || debug.canSuspend || debug.canHibernate || debug.canHybridSleep
 
             onClicked: if (enabled) root.state = "statePower"
+
+            font: fonts.slicesTop
         }
 
         SlicedButton
@@ -138,6 +145,8 @@ Rectangle
             text: pageSessions.currentSessionName
 
             onClicked: root.state = "stateSessions"
+
+            font: fonts.slicesTop
         }
 
         SlicedButton
@@ -149,6 +158,8 @@ Rectangle
             text: pageUsers.currentUserLogin
 
             onClicked: root.state = "stateUsers"
+
+            font: fonts.slicesTop
         }
     }
 
@@ -235,6 +246,8 @@ Rectangle
             highlighted: keyboard.capsLock
 
             onClicked: keyboard.capsLock = !keyboard.capsLock
+
+            font: fonts.slicesBottomLeft
         }
 
         SlicedButton
@@ -247,6 +260,8 @@ Rectangle
             highlighted: keyboard.numLock
 
             onClicked: keyboard.numLock = !keyboard.numLock
+
+            font: fonts.slicesBottomLeft
         }
 
         SlicedButton
@@ -256,6 +271,8 @@ Rectangle
             y: 5
 
             text: keyboard.layouts[keyboard.currentLayout].longName
+
+            font: fonts.slicesBottomLeft
         }
 
         Item
@@ -275,6 +292,8 @@ Rectangle
                     text = new Date().toLocaleString(Qt.locale(),
                         "dddd")
                 }
+
+                font: fonts.slicesBottomRight
             }
 
             SlicedButton
@@ -288,6 +307,8 @@ Rectangle
                     text = new Date().toLocaleString(Qt.locale(),
                         "dd.MM.yyyy")
                 }
+
+                font: fonts.slicesBottomRight
             }
 
             SlicedButton
@@ -303,6 +324,8 @@ Rectangle
                     text = new Date().toLocaleString(Qt.locale(),
                         "hh:mm:ss")
                 }
+
+                font: fonts.slicesBottomRight
             }
         }
 
