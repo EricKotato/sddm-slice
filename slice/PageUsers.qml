@@ -642,7 +642,10 @@ Item
             pageRoot.enabled = false
             progressBarLoop.start()
             loginEnterAnimation.start()
-            sddm.login(currentUserLogin, passwordField.text, selectedSessionIndex)
+            if (debug.loginError)
+                loginTimeoutTimer.start()
+            else
+                sddm.login(currentUserLogin, passwordField.text, selectedSessionIndex)
         }
         else
         {
@@ -668,6 +671,13 @@ Item
             errorMessage.opacity = 0
             errorMessageBg.opacity = 0
         }
+    }
+
+    Timer
+    {
+        id: loginTimeoutTimer
+        interval: debug.loginTimeout * 1000
+        onTriggered: sddm.onLoginFailed()
     }
 
     Keys.onUpPressed: scroll_down()
