@@ -25,7 +25,7 @@ Create file `theme.conf.user` in theme folder. See `slice/theme.conf` for refere
 
 ### Debug mode options
 
-Since "Power" screen can't be viewed in greeter because it depends on `sddm.*` properties, there is a debug mode.
+There are some things that can't be tested well in greeter (e.g. shutdown options or login error). So there is a debug mode.
 
 #### Boolean options
 
@@ -37,6 +37,12 @@ Since "Power" screen can't be viewed in greeter because it depends on `sddm.*` p
 * `debug_can_suspend` - sets `sddm.canSuspend` (shows "Suspend").
 * `debug_can_hibernate` - sets `sddm.canHibernate` (shows "Hibernate").
 * `debug_can_hybrid_sleep` - sets `sddm.canHybridSleep` (shows "Hybrid Sleep").
+* `debug_login_error` - forces login error.
+
+
+#### Number options
+
+* `debug_login_timeout` - time between pressing "Login" and login error in seconds. Not effective if `debug_login_error` is disabled.
 
 #### String options
 

@@ -31,7 +31,8 @@ Item
     readonly property bool canSuspend: debugbool(config.debug_can_suspend, sddm.canSuspend)
     readonly property bool canHibernate: debugbool(config.debug_can_hibernate, sddm.canHibernate)
     readonly property bool canHybridSleep: debugbool(config.debug_can_hybrid_sleep, sddm.canHybridSleep)
-
+    readonly property bool loginError: debugbool(config.debug_login_error, false)
+    readonly property int loginTimeout: debugnum(config.debug_login_timeout, 0)
     readonly property string hostName: debugstr(config.debug_hostname, sddm.hostName)
 
 }
