@@ -5,7 +5,7 @@ Item
     id: buttonRoot
     height: 25
 
-    property int fontSize: 13
+    property real fontSize: 13
     property string text: ""
 
     property bool hasLeftSlice: true
