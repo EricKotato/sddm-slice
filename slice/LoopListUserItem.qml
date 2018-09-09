@@ -7,13 +7,14 @@ Item
     id: itemRoot
     opacity: distance
     width: parent.width
+    height: userName == "" ? userLoginText.height + 14 : userNameText.height + userLoginText.height - 4
     
     property bool hover: false
     property bool hoverEnabled: true
 
     transform: Scale
     {
-        origin.x: 80
+        origin.x: itemRoot.height + 12
         xScale: distance
         yScale: distance
     }
@@ -27,46 +28,48 @@ Item
     {
         id: profilePicture
         source: userAvatar
-        sourceSize.width: 60
-        sourceSize.height: 60
+        sourceSize.width: itemRoot.height - 8
+        sourceSize.height: itemRoot.height - 8
         x: 4
         y: 4
     }
 
     Rectangle
     {
-        width: 68
-        height: 68
+        width: itemRoot.height
+        height: itemRoot.height
         color: ( hoverEnabled && hover ? colors.iconBgHover : colors.iconBg )
     }
 
 
     Text
     {
+        id: userNameText
         text: userName
         color: ( hoverEnabled && hover ? colors.textHover : colors.text )
         
         font: fonts.listItemMed
 
-        x: 80
+        x: itemRoot.height + 12
         y: 0
     }
 
     Text
     {
+        id: userLoginText
         text: userLogin
         color: ( hoverEnabled && hover ? (userName == "" ? colors.textHover : colors.textDimmedHover ) : (userName == "" ? colors.text : colors.textDimmed ) )
-        y: userName == "" ? 6 : 36
+        y: userName == "" ? 7 : userNameText.height * 0.8
         font: userName == "" ? fonts.listItemBig : fonts.listItemSub
-        x: 80
+        x: itemRoot.height + 12
     }
 
     Rectangle
     {
-        x: 70
+        x: itemRoot.height + 2
         y: 0
-        width: parent.width - 70
-        height: 68
+        width: parent.width - itemRoot.height - 2
+        height: itemRoot.height
         color: ( hoverEnabled && hover ? colors.textBgHover : colors.textBg )
     }
 }
