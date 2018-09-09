@@ -118,7 +118,7 @@ Rectangle
         x: 0
         y: 0
         width: root.width
-        height: 35
+        height: Math.max(buttonPagePower.height, buttonPageSessions.height, buttonPageUsers.height) + 10
 
         SlicedButton
         {
@@ -169,7 +169,7 @@ Rectangle
         x: 0
         y: areaTop.height
         width: root.width
-        height: root.height - (areaTop.height * 2)
+        height: root.height - areaTop.height - areaBottom.height
 
         PagePower
         {
@@ -231,15 +231,22 @@ Rectangle
     {
         id: areaBottom
         x: 0
-        y: areaTop.height + areaMain.height
+        y: root.height - height
         width: root.width
-        height: 35
+        height: Math.max(
+                    buttonCapsLock.height,
+                    buttonNumLock.height,
+                    buttonKeyboardLayout.height,
+                    buttonWeekday.height,
+                    buttonDate.height,
+                    buttonTime.height
+                ) + 10
 
         SlicedButton
         {
             id: buttonCapsLock
             x: 5
-            y: 5
+            y: areaBottom.height - height - 5
 
             hasLeftSlice: false
             text: "Caps Lock"
@@ -254,7 +261,7 @@ Rectangle
         {
             id: buttonNumLock
             x: buttonCapsLock.x + buttonCapsLock.widthPartial + 3
-            y: 5
+            y: areaBottom.height - height - 5
 
             text: "Num Lock"
             highlighted: keyboard.numLock
@@ -268,7 +275,7 @@ Rectangle
         {
             id: buttonKeyboardLayout
             x: buttonNumLock.x + buttonNumLock.widthPartial + 3
-            y: 5
+            y: areaBottom.height - height - 5
 
             text: keyboard.layouts[keyboard.currentLayout].longName
 
@@ -285,7 +292,7 @@ Rectangle
             {
                 id: buttonWeekday
                 x: 5
-                y: 5
+                y: areaBottom.height - height - 5
 
                 function updateTime()
                 {
@@ -300,7 +307,7 @@ Rectangle
             {
                 id: buttonDate
                 x: buttonWeekday.x + buttonWeekday.widthPartial + 3
-                y: 5
+                y: areaBottom.height - height - 5
 
                 function updateTime()
                 {
@@ -315,7 +322,7 @@ Rectangle
             {
                 id: buttonTime
                 x: buttonDate.x + buttonDate.widthPartial + 3
-                y: 5
+                y: areaBottom.height - height - 5
 
                 hasRightSlice: false
 
