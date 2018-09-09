@@ -3,13 +3,14 @@ import QtQuick 2.7
 Item
 {
     id: buttonRoot
-    height: 25
+    height: paddingTop * 2 + buttonText.height
 
     property font font: Qt.font({
         family: config.font,
         bold: true,
         pointSize: 13,
-        capitalization: Font.AllUppercase
+        capitalization: Font.AllUppercase,
+        smooth: false
     });
 
     property string text: ""
@@ -230,7 +231,6 @@ Item
         font: buttonRoot.font
 
         text: ""
-
     }
 
     MouseArea
