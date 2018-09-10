@@ -44,6 +44,7 @@ Item
         sourceSize.height: descriptionLabel.height + 10 - 4
         x: 2
         y: 2
+        opacity: 0
     }
 
     ColorOverlay
@@ -52,6 +53,7 @@ Item
         anchors.fill: powerItemIcon
         source: powerItemIcon
         color: ( hover ? colors.iconHover : colors.icon )
+        opacity: parent.opacity
     }
 
     Rectangle
