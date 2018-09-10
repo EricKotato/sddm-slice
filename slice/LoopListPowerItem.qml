@@ -59,8 +59,10 @@ Item
         id: descriptionLabel
         text: itemRoot.title
         color: ( hover ? colors.textHover : colors.text )
+        width: parent.width - descriptionLabel.height + 10 - 2 - 24
 
         font: fonts.listItemMed
+        elide: Text.ElideRight
 
         x: descriptionLabel.height + 10 + 12
         y: 5

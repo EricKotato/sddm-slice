@@ -50,8 +50,12 @@ Item
         
         font: fonts.listItemMed
 
+        elide: Text.ElideRight
+
         x: itemRoot.height + 12
         y: 0
+
+        width: itemRoot.width - itemRoot.height - 26
     }
 
     Text
@@ -62,6 +66,10 @@ Item
         y: userName == "" ? 7 : userNameText.height * 0.8
         font: userName == "" ? fonts.listItemBig : fonts.listItemSub
         x: itemRoot.height + 12
+
+        elide: Text.ElideRight
+
+        width: itemRoot.width - itemRoot.height - 26
     }
 
     Rectangle
