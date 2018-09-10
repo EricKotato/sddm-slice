@@ -41,6 +41,15 @@ Item
         y: 4
     }
 
+    Rectangle
+    {
+        x: itemRoot.height + 2
+        y: 0
+        width: parent.width - itemRoot.height - 2
+        height: itemRoot.height
+        color: ( hoverEnabled && hover ? colors.textBgHover : colors.textBg )
+    }
+
     Text
     {
         id: userNameText
@@ -55,15 +64,6 @@ Item
         y: 0
 
         width: itemRoot.width - itemRoot.height - 26
-    }
-
-    Rectangle
-    {
-        x: itemRoot.height + 2
-        y: 0
-        width: parent.width - itemRoot.height - 2
-        height: itemRoot.height
-        color: ( hoverEnabled && hover ? colors.textBgHover : colors.textBg )
     }
 
     Text
