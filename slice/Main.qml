@@ -177,9 +177,6 @@ Rectangle
             width: areaMain.width
             height: areaMain.height
 
-            Keys.onTabPressed: { root.state = "stateSessions" }
-            Keys.onBacktabPressed: { root.state = "stateUsers" }
-
             Behavior on x { NumberAnimation { duration: 150 } }
         }
 
@@ -188,15 +185,6 @@ Rectangle
             id: pageSessions
             width: areaMain.width
             height: areaMain.height
-
-            Keys.onTabPressed: { root.state = "stateUsers" }
-            Keys.onBacktabPressed:
-            {
-                if (buttonPagePower.enabled)
-                    root.state = "statePower"
-                else
-                    root.state = "stateSessions"
-            }
 
             Behavior on x { NumberAnimation { duration: 150 } }
 
@@ -210,15 +198,6 @@ Rectangle
             id: pageUsers
             width: areaMain.width
             height: areaMain.height
-
-            Keys.onTabPressed:
-            {
-                if (buttonPagePower.enabled)
-                    root.state = "statePower"
-                else
-                    root.state = "stateSessions"
-            }
-            Keys.onBacktabPressed: { root.state = "stateSessions" }
 
             Behavior on x { NumberAnimation { duration: 150 } }
 
@@ -394,6 +373,39 @@ Rectangle
                     }
                     break
             }
+        }
+    }
+
+    Keys.onTabPressed: {
+        switch(root.state)
+        {
+            case "statePower":
+                root.state = "stateSessions";
+                break;
+
+            case "stateSessions":
+                root.state = "stateUsers";
+                break;
+
+            case "stateUsers":
+                root.state = (buttonPagePower.enabled) ? "statePower" : "stateSessions";
+                break;
+        }
+    }
+    Keys.onBacktabPressed: { 
+        switch(root.state)
+        {
+            case "statePower":
+                root.state = "stateUsers";
+                break;
+
+            case "stateSessions":
+                root.state = (buttonPagePower.enabled) ? "statePower" : "stateUsers";
+                break;
+
+            case "stateUsers":
+                root.state = "stateSessions";
+                break;
         }
     }
 }
