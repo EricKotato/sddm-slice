@@ -12,6 +12,15 @@ Item
     property string sessionName: ""
     property bool hover: false
 
+    Rectangle
+    {
+        x: sessionNameLabel.x - 10
+        y: sessionNameLabel.y - 5
+        width: sessionNameLabel.width + 20
+        height: sessionNameLabel.height + 10
+        color: ( hover ? colors.textBgHover : colors.textBg )
+    }
+
     Text
     {
         id: sessionNameLabel
@@ -23,14 +32,5 @@ Item
 
         x: parent.x + 10
         y: 5
-    }
-
-    Rectangle
-    {
-        x: sessionNameLabel.x - 10
-        y: sessionNameLabel.y - 5
-        width: sessionNameLabel.width + 20
-        height: sessionNameLabel.height + 10
-        color: ( hover ? colors.textBgHover : colors.textBg )
     }
 }

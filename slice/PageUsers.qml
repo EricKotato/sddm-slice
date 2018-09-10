@@ -223,6 +223,16 @@ Item
             userAvatar: get_avatar(3)
         }
 
+        Rectangle
+        {
+            id: passwordFieldBg
+            y: middleItem.y + middleItem.height + 2
+            width: parent.width
+            height: Math.max(fonts.input.pointSize, fonts.placeholder.pointSize) + 20
+            opacity: hasLoginShown ? 1 : 0
+            color: colors.inputBg
+        }
+
         TextInput
         {
             id: passwordField
@@ -258,15 +268,6 @@ Item
             font: fonts.placeholder
 
             text: localeText.password
-        }
-
-        Rectangle {
-            id: passwordFieldBg
-            y: middleItem.y + middleItem.height + 2
-            width: parent.width
-            height: Math.max(fonts.input.pointSize, fonts.placeholder.pointSize) + 20
-            opacity: hasLoginShown ? 1 : 0
-            color: colors.inputBg
         }
 
         Rectangle
@@ -342,6 +343,19 @@ Item
             font: fonts.slicesLoginButtons
         }
 
+        Rectangle
+        {
+            id: errorMessageBg
+            x: errorMessage.x - 10
+            y: errorMessage.y - 5
+            width: errorMessage.width + 20
+            height: errorMessage.height + 10
+            color: colors.errorBg
+            opacity: 0
+
+            Behavior on opacity { NumberAnimation { duration: userListContainer.scrollDuration } }
+        }
+
         Text
         {
             id: errorMessage
@@ -356,19 +370,6 @@ Item
 
             Behavior on opacity { NumberAnimation { duration: userListContainer.scrollDuration } }
 
-        }
-
-        Rectangle
-        {
-            id: errorMessageBg
-            x: errorMessage.x - 10
-            y: errorMessage.y - 5
-            width: errorMessage.width + 20
-            height: errorMessage.height + 10
-            color: colors.errorBg
-            opacity: 0
-
-            Behavior on opacity { NumberAnimation { duration: userListContainer.scrollDuration } }
         }
 
         ParallelAnimation

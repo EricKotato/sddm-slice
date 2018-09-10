@@ -24,6 +24,13 @@ Item
     property string userLogin: ""
     property string userAvatar: "icons/no_avatar.svg"
 
+    Rectangle
+    {
+        width: itemRoot.height
+        height: itemRoot.height
+        color: ( hoverEnabled && hover ? colors.iconBgHover : colors.iconBg )
+    }
+
     Image
     {
         id: profilePicture
@@ -33,14 +40,6 @@ Item
         x: 4
         y: 4
     }
-
-    Rectangle
-    {
-        width: itemRoot.height
-        height: itemRoot.height
-        color: ( hoverEnabled && hover ? colors.iconBgHover : colors.iconBg )
-    }
-
 
     Text
     {
@@ -58,6 +57,15 @@ Item
         width: itemRoot.width - itemRoot.height - 26
     }
 
+    Rectangle
+    {
+        x: itemRoot.height + 2
+        y: 0
+        width: parent.width - itemRoot.height - 2
+        height: itemRoot.height
+        color: ( hoverEnabled && hover ? colors.textBgHover : colors.textBg )
+    }
+
     Text
     {
         id: userLoginText
@@ -70,14 +78,5 @@ Item
         elide: Text.ElideRight
 
         width: itemRoot.width - itemRoot.height - 26
-    }
-
-    Rectangle
-    {
-        x: itemRoot.height + 2
-        y: 0
-        width: parent.width - itemRoot.height - 2
-        height: itemRoot.height
-        color: ( hoverEnabled && hover ? colors.textBgHover : colors.textBg )
     }
 }

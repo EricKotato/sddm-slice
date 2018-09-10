@@ -29,6 +29,13 @@ Item
     property string icon: "icons/no_avatar.svg"
     property string title: ""
 
+    Rectangle
+    {
+        width: descriptionLabel.height + 10
+        height: descriptionLabel.height + 10
+        color: ( hover ? colors.iconBgHover : colors.iconBg )
+    }
+
     Image
     {
         id: powerItemIcon
@@ -49,9 +56,10 @@ Item
 
     Rectangle
     {
-        width: descriptionLabel.height + 10
+        x: descriptionLabel.height + 10 + 2
+        width: parent.width - descriptionLabel.height + 10 - 2
         height: descriptionLabel.height + 10
-        color: ( hover ? colors.iconBgHover : colors.iconBg )
+        color: ( hover ? colors.textBgHover : colors.textBg )
     }
 
     Text
@@ -66,14 +74,6 @@ Item
 
         x: descriptionLabel.height + 10 + 12
         y: 5
-    }
-
-    Rectangle
-    {
-        x: descriptionLabel.height + 10 + 2
-        width: parent.width - descriptionLabel.height + 10 - 2
-        height: descriptionLabel.height + 10
-        color: ( hover ? colors.textBgHover : colors.textBg )
     }
 
     MouseArea
