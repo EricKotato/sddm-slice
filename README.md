@@ -18,7 +18,6 @@ Create file `theme.conf.user` in theme folder. See `slice/theme.conf` for refere
 
 ### Base options
 
-* `font` - overall font. Defaults to `Roboto`.
 * `background` - path to background image. If not set, falls back to `color_bg`. Not set by default.
 * `bg_mode` - background image fill mode. Can be either `aspect`, `fill`, `tile` or `none`. Defaults to `aspect`.
 * `parallax_bg_shift` - shifting of parallax background on tab change in pixels. `0` disables parallax motion. Negative values will scroll background in opposite direction. Default is `20`.
@@ -51,14 +50,22 @@ There are some things that can't be tested well in greeter (e.g. shutdown option
 
 ### Color scheme
 
-There are many color options. In fact, too many. So now they are grouped by layers in [color scheme](https://github.com/RadRussianRus/sddm-slice/wiki/Color-scheme). Most of them are optional, only mandatory options are from [layer 1](https://github.com/RadRussianRus/sddm-slice/wiki/Layer-1):
+There are many color options. In fact, too many. So now they are grouped by layers in [color scheme](https://github.com/RadRussianRus/sddm-slice/wiki/Color-Scheme). Most of them are optional, only mandatory options are from [layer 1](https://github.com/RadRussianRus/sddm-slice/wiki/Color-Scheme-Layer-1):
 
 * `color_bg` - background color. Defaults to `#222222`.
 * `color_main` - main color. Defaults to `#dddddd`.
 * `color_dimmed` - dimmed main color. Defaults to `#888888`.
 * `color_contrast` - color that contrasting to both main and dimmed. Defaults to `#1f1f1f`.
 
-Info about other layers can be found on wiki: [layer 2](https://github.com/RadRussianRus/sddm-slice/wiki/Layer-2), [layer 3](https://github.com/RadRussianRus/sddm-slice/wiki/Layer-3).
+Info about other layers can be found on wiki: [layer 2](https://github.com/RadRussianRus/sddm-slice/wiki/Color-Scheme-Layer-2), [layer 3](https://github.com/RadRussianRus/sddm-slice/wiki/Color-Scheme-Layer-3).
+
+### Font scheme
+
+There are also many font options, so there is now [font scheme](https://github.com/RadRussianRus/sddm-slice/wiki/Font-Scheme) too. Most of them are optional, only mandatory option is from [layer 1](https://github.com/RadRussianRus/sddm-slice/wiki/Font-Scheme-Layer-1):
+
+* `font` - overall font. Defaults to `Roboto`.
+
+Info about other layers can be found on wiki: [layer 2](https://github.com/RadRussianRus/sddm-slice/wiki/Font-Scheme-Layer-2), [layer 3](https://github.com/RadRussianRus/sddm-slice/wiki/Font-Scheme-Layer-3).
 
 ## License
 
