@@ -3,9 +3,16 @@ import QtQuick 2.7
 Item
 {
     id: buttonRoot
-    height: 25
+    height: paddingTop * 2 + buttonText.height
 
-    property real fontSize: 13
+    property font font: Qt.font({
+        family: config.font,
+        bold: true,
+        pointSize: 13,
+        capitalization: Font.AllUppercase,
+        smooth: false
+    });
+
     property string text: ""
 
     property bool hasLeftSlice: true
@@ -221,16 +228,9 @@ Item
         y: paddingTop
         color: colors.buttonText
 
-        font
-        {
-            family: config.font
-            bold: true
-            pointSize: fontSize
-            capitalization: Font.AllUppercase
-        }
+        font: buttonRoot.font
 
         text: ""
-
     }
 
     MouseArea

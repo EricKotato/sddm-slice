@@ -14,8 +14,8 @@ Item
 
     transform: Scale
     {
-        origin.x: 54
-        origin.y: 29
+        origin.x: descriptionLabel.height + 10 + 2
+        origin.y: descriptionLabel.height + 10 / 2
         xScale: distance
         yScale: distance
     }
@@ -33,8 +33,8 @@ Item
     {
         id: powerItemIcon
         source: icon
-        sourceSize.width: 48
-        sourceSize.height: 48
+        sourceSize.width: descriptionLabel.height + 10 - 4
+        sourceSize.height: descriptionLabel.height + 10 - 4
         x: 2
         y: 2
     }
@@ -49,8 +49,8 @@ Item
 
     Rectangle
     {
-        width: 52
-        height: 52
+        width: descriptionLabel.height + 10
+        height: descriptionLabel.height + 10
         color: ( hover ? colors.iconBgHover : colors.iconBg )
     }
 
@@ -59,30 +59,27 @@ Item
         id: descriptionLabel
         text: itemRoot.title
         color: ( hover ? colors.textHover : colors.text )
+        width: parent.width - descriptionLabel.height + 10 - 2 - 24
 
-        font
-        {
-            family: config.font
-            pointSize: 28
-            bold: true
-        }
+        font: fonts.listItemMed
+        elide: Text.ElideRight
 
-        x: 64
+        x: descriptionLabel.height + 10 + 12
         y: 5
     }
 
     Rectangle
     {
-        x: 54
-        width: parent.width - 54
-        height: 52
+        x: descriptionLabel.height + 10 + 2
+        width: parent.width - descriptionLabel.height + 10 - 2
+        height: descriptionLabel.height + 10
         color: ( hover ? colors.textBgHover : colors.textBg )
     }
 
     MouseArea
     {
         width: descriptionLabel.x + descriptionLabel.width
-        height: 52
+        height: descriptionLabel.height + 10
         hoverEnabled: true
 
         onClicked: itemRoot.clicked()

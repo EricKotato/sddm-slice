@@ -70,6 +70,10 @@ Rectangle
         return Boolean(Number(str).valueOf()).valueOf();
     }
 
+    function not_null(str) {
+        return !(str === null || str === undefined);
+    }
+
     TextConstants { id: localeText }
     Debug { id: debug }
 
@@ -106,6 +110,7 @@ Rectangle
     }
 
     ColorScheme { id: colors }
+    FontScheme { id: fonts }
 
     Item
     {
@@ -113,7 +118,7 @@ Rectangle
         x: 0
         y: 0
         width: root.width
-        height: 35
+        height: Math.max(buttonPagePower.height, buttonPageSessions.height, buttonPageUsers.height) + 10
 
         SlicedButton
         {
@@ -127,6 +132,8 @@ Rectangle
             enabled: debug.canPowerOff || debug.canReboot || debug.canSuspend || debug.canHibernate || debug.canHybridSleep
 
             onClicked: if (enabled) root.state = "statePower"
+
+            font: fonts.slicesTop
         }
 
         SlicedButton
@@ -138,6 +145,8 @@ Rectangle
             text: pageSessions.currentSessionName
 
             onClicked: root.state = "stateSessions"
+
+            font: fonts.slicesTop
         }
 
         SlicedButton
@@ -149,6 +158,8 @@ Rectangle
             text: pageUsers.currentUserLogin
 
             onClicked: root.state = "stateUsers"
+
+            font: fonts.slicesTop
         }
     }
 
@@ -158,7 +169,7 @@ Rectangle
         x: 0
         y: areaTop.height
         width: root.width
-        height: root.height - (areaTop.height * 2)
+        height: root.height - areaTop.height - areaBottom.height
 
         PagePower
         {
@@ -220,42 +231,55 @@ Rectangle
     {
         id: areaBottom
         x: 0
-        y: areaTop.height + areaMain.height
+        y: root.height - height
         width: root.width
-        height: 35
+        height: Math.max(
+                    buttonCapsLock.height,
+                    buttonNumLock.height,
+                    buttonKeyboardLayout.height,
+                    buttonWeekday.height,
+                    buttonDate.height,
+                    buttonTime.height
+                ) + 10
 
         SlicedButton
         {
             id: buttonCapsLock
             x: 5
-            y: 5
+            y: areaBottom.height - height - 5
 
             hasLeftSlice: false
             text: "Caps Lock"
             highlighted: keyboard.capsLock
 
             onClicked: keyboard.capsLock = !keyboard.capsLock
+
+            font: fonts.slicesBottomLeft
         }
 
         SlicedButton
         {
             id: buttonNumLock
             x: buttonCapsLock.x + buttonCapsLock.widthPartial + 3
-            y: 5
+            y: areaBottom.height - height - 5
 
             text: "Num Lock"
             highlighted: keyboard.numLock
 
             onClicked: keyboard.numLock = !keyboard.numLock
+
+            font: fonts.slicesBottomLeft
         }
 
         SlicedButton
         {
             id: buttonKeyboardLayout
             x: buttonNumLock.x + buttonNumLock.widthPartial + 3
-            y: 5
+            y: areaBottom.height - height - 5
 
             text: keyboard.layouts[keyboard.currentLayout].longName
+
+            font: fonts.slicesBottomLeft
         }
 
         Item
@@ -268,33 +292,37 @@ Rectangle
             {
                 id: buttonWeekday
                 x: 5
-                y: 5
+                y: areaBottom.height - height - 5
 
                 function updateTime()
                 {
                     text = new Date().toLocaleString(Qt.locale(),
                         "dddd")
                 }
+
+                font: fonts.slicesBottomRight
             }
 
             SlicedButton
             {
                 id: buttonDate
                 x: buttonWeekday.x + buttonWeekday.widthPartial + 3
-                y: 5
+                y: areaBottom.height - height - 5
 
                 function updateTime()
                 {
                     text = new Date().toLocaleString(Qt.locale(),
                         "dd.MM.yyyy")
                 }
+
+                font: fonts.slicesBottomRight
             }
 
             SlicedButton
             {
                 id: buttonTime
                 x: buttonDate.x + buttonDate.widthPartial + 3
-                y: 5
+                y: areaBottom.height - height - 5
 
                 hasRightSlice: false
 
@@ -303,6 +331,8 @@ Rectangle
                     text = new Date().toLocaleString(Qt.locale(),
                         "hh:mm:ss")
                 }
+
+                font: fonts.slicesBottomRight
             }
         }
 

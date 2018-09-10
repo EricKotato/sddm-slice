@@ -187,7 +187,7 @@ Item
         LoopListUserItem
         {
             id: middleItem
-            y: hasLoginShown ? pageRoot.height / 2.3 - 40 : pageRoot.height / 2.3
+            y: hasLoginShown ? pageRoot.height / 2.3 - (middleItem.height / 2 + passwordFieldBg.height + progressBar.height + 2 + buttonUserLogin.height) / 2 : pageRoot.height / 2.3
             userName: get_name(0)
             userLogin: get_login(0)
             userAvatar: get_avatar(0)
@@ -227,9 +227,8 @@ Item
         {
             id: passwordField
             x: 10
-            y: hasLoginShown ? pageRoot.height / 2.3 + 37 : pageRoot.height / 2.3 + 62
+            y: (passwordFieldBg.height - height) / 2 + passwordFieldBg.y
             width: parent.width - 20
-            height: 25
             opacity: hasLoginShown ? 1 : 0
             color: colors.inputText
             selectionColor: colors.inputSelectionBg
@@ -239,12 +238,7 @@ Item
             clip: true
             selectByMouse: true
             
-            font
-            {
-                family: config.font
-                bold: true
-                pointSize: 18
-            }
+            font: fonts.input
 
             Component.onCompleted: forceActiveFocus()
 
@@ -254,28 +248,23 @@ Item
         {
             id: passwordFieldPlaceholder
             x: passwordField.x
-            y: passwordField.y
+            y: (passwordFieldBg.height - height) / 2 + passwordFieldBg.y
             width: passwordField.width
             opacity: hasLoginShown ? 1 : 0
             visible: passwordField.text.length <= 0
 
             color: colors.inputPlaceholderText
 
-            font
-            {
-                family: config.font
-                bold: true
-                pointSize: 18
-            }
+            font: fonts.placeholder
 
             text: localeText.password
         }
 
         Rectangle {
             id: passwordFieldBg
-            y: hasLoginShown ? pageRoot.height / 2.3 + 30 : pageRoot.height / 2.3 + 55
+            y: middleItem.y + middleItem.height + 2
             width: parent.width
-            height: 40
+            height: Math.max(fonts.input.pointSize, fonts.placeholder.pointSize) + 20
             opacity: hasLoginShown ? 1 : 0
             color: colors.inputBg
         }
@@ -283,7 +272,7 @@ Item
         Rectangle
         {
             id: progressBar
-            y: hasLoginShown ? pageRoot.height / 2.3 + 70 : pageRoot.height / 2.3 + 105
+            y: passwordFieldBg.y + passwordFieldBg.height
             width: parent.width
             height: 2
             opacity: hasLoginShown ? 1 : 0
@@ -326,7 +315,7 @@ Item
         {
             id: buttonUserLogin
             x: userListContainer.width - widthFull
-            y: hasLoginShown ? pageRoot.height / 2.3 + 74 : pageRoot.height / 2.3 + 109
+            y: progressBar.y + progressBar.height + 2
             paddingTop: 2
             highlighted: true
             opacity: hasLoginShown ? 1 : 0
@@ -334,19 +323,23 @@ Item
             text: localeText.login
 
             onClicked: select_or_login()
+
+            font: fonts.slicesLoginButtons
         }
 
         SlicedButton
         {
             id: buttonUserBack
             x: userListContainer.width - widthFull - buttonUserLogin.widthPartial - 3
-            y: hasLoginShown ? pageRoot.height / 2.3 + 74 : pageRoot.height / 2.3 + 109
+            y: buttonUserLogin.y
             paddingTop: 2
             opacity: hasLoginShown ? 1 : 0
 
             text: qsTr("Back")
 
             onClicked: back_to_selection()
+
+            font: fonts.slicesLoginButtons
         }
 
         Text
@@ -359,12 +352,7 @@ Item
 
             color: colors.errorText
 
-            font
-            {
-                family: config.font
-                bold: true
-                pointSize: 18
-            }
+            font: fonts.error
 
             Behavior on opacity { NumberAnimation { duration: userListContainer.scrollDuration } }
 
@@ -428,7 +416,7 @@ Item
             NumberAnimation { target: botMidItem; property: "distance"; to: 0; duration: userListContainer.scrollDuration }
             NumberAnimation { target: botFarItem; property: "distance"; to: 0; duration: userListContainer.scrollDuration }
 
-            NumberAnimation { target: middleItem; property: "y"; to: pageRoot.height / 2.3 - 40; duration: userListContainer.scrollDuration }
+            NumberAnimation { target: middleItem; property: "y"; to: pageRoot.height / 2.3 - (middleItem.height / 2 + passwordFieldBg.height + progressBar.height + 2 + buttonUserLogin.height) / 2; duration: userListContainer.scrollDuration }
 
             NumberAnimation { target: passwordField; property: "opacity"; to: 1; duration: userListContainer.scrollDuration }
             NumberAnimation { target: passwordFieldPlaceholder; property: "opacity"; to: 1; duration: userListContainer.scrollDuration }
@@ -436,12 +424,6 @@ Item
             NumberAnimation { target: progressBar; property: "opacity"; to: 1; duration: userListContainer.scrollDuration }
             NumberAnimation { target: buttonUserBack; property: "opacity"; to: 1; duration: userListContainer.scrollDuration }
             NumberAnimation { target: buttonUserLogin; property: "opacity"; to: 1; duration: userListContainer.scrollDuration }
-
-            NumberAnimation { target: passwordField; property: "y"; to: pageRoot.height / 2.3 + 37; duration: userListContainer.scrollDuration }
-            NumberAnimation { target: passwordFieldBg; property: "y"; to: pageRoot.height / 2.3 + 30; duration: userListContainer.scrollDuration }
-            NumberAnimation { target: progressBar; property: "y"; to: pageRoot.height / 2.3 + 70; duration: userListContainer.scrollDuration }
-            NumberAnimation { target: buttonUserBack; property: "y"; to: pageRoot.height / 2.3 + 74; duration: userListContainer.scrollDuration }
-            NumberAnimation { target: buttonUserLogin; property: "y"; to: pageRoot.height / 2.3 + 74; duration: userListContainer.scrollDuration }
 
             onStopped: 
             {
@@ -466,12 +448,6 @@ Item
             NumberAnimation { target: progressBar; property: "opacity"; to: 0; duration: userListContainer.scrollDuration }
             NumberAnimation { target: buttonUserBack; property: "opacity"; to: 0; duration: userListContainer.scrollDuration }
             NumberAnimation { target: buttonUserLogin; property: "opacity"; to: 0; duration: userListContainer.scrollDuration }
-
-            NumberAnimation { target: passwordField; property: "y"; to: pageRoot.height / 2.3 + 62; duration: userListContainer.scrollDuration }
-            NumberAnimation { target: passwordFieldBg; property: "y"; to: pageRoot.height / 2.3 + 55; duration: userListContainer.scrollDuration }
-            NumberAnimation { target: progressBar; property: "y"; to: pageRoot.height / 2.3 + 105; duration: userListContainer.scrollDuration }
-            NumberAnimation { target: buttonUserBack; property: "y"; to: pageRoot.height / 2.3 + 109; duration: userListContainer.scrollDuration }
-            NumberAnimation { target: buttonUserLogin; property: "y"; to: pageRoot.height / 2.3 + 109; duration: userListContainer.scrollDuration }
 
             onStopped:
             {
@@ -561,7 +537,7 @@ Item
             id: loginEnterAnimation
             NumberAnimation { target: passwordField; property: "opacity"; to: 0; duration: userListContainer.scrollDuration }
             NumberAnimation { target: passwordFieldBg; property: "height"; to: 0; duration: userListContainer.scrollDuration }
-            NumberAnimation { target: passwordFieldBg; property: "y"; to: pageRoot.height / 2.3 + 70; duration: userListContainer.scrollDuration }
+            NumberAnimation { target: passwordFieldBg; property: "y"; to: pageRoot.height / 2.3 - (middleItem.height / 2 + progressBar.height + 2) / 2; duration: userListContainer.scrollDuration }
             NumberAnimation { target: passwordFieldPlaceholder; property: "opacity"; to: 0; duration: userListContainer.scrollDuration }
             NumberAnimation { target: buttonUserBack; property: "opacity"; to: 0; duration: userListContainer.scrollDuration }
             NumberAnimation { target: buttonUserLogin; property: "opacity"; to: 0; duration: userListContainer.scrollDuration }
@@ -578,7 +554,7 @@ Item
             id: loginExitAnimation
             NumberAnimation { target: passwordField; property: "opacity"; to: 1; duration: userListContainer.scrollDuration }
             NumberAnimation { target: passwordFieldBg; property: "height"; to: 40; duration: userListContainer.scrollDuration }
-            NumberAnimation { target: passwordFieldBg; property: "y"; to: pageRoot.height / 2.3 + 30; duration: userListContainer.scrollDuration }
+            NumberAnimation { target: passwordFieldBg; property: "y"; to: pageRoot.height / 2.3 - (middleItem.height / 2 + passwordFieldBg.height + progressBar.height + 2 + buttonUserLogin.height) / 2; duration: userListContainer.scrollDuration }
             NumberAnimation { target: passwordFieldPlaceholder; property: "opacity"; to: 1; duration: userListContainer.scrollDuration }
             NumberAnimation { target: buttonUserBack; property: "opacity"; to: 1; duration: userListContainer.scrollDuration }
             NumberAnimation { target: buttonUserLogin; property: "opacity"; to: 1; duration: userListContainer.scrollDuration }
@@ -586,7 +562,7 @@ Item
             NumberAnimation { target: progressBarSlider1; property: "opacity"; to: 0; duration: userListContainer.scrollDuration }
             NumberAnimation { target: progressBarSlider2; property: "opacity"; to: 0; duration: userListContainer.scrollDuration }
             NumberAnimation { target: progressBarBg; property: "opacity"; to: 0; duration: userListContainer.scrollDuration }
-            NumberAnimation { target: middleItem; property: "y"; to: pageRoot.height / 2.3 - 40; duration: userListContainer.scrollDuration }
+            NumberAnimation { target: middleItem; property: "y"; to: pageRoot.height / 2.3 - (middleItem.height / 2 + passwordFieldBg.height + progressBar.height + 2 + buttonUserLogin.height) / 2; duration: userListContainer.scrollDuration }
 
             onStopped:
             {
