@@ -126,7 +126,7 @@ Rectangle
             x: 5
             y: 5
 
-            hasLeftSlice: false
+            skewLeft: 0
             text: debug.hostName ? debug.hostName : "Hostname"
 
             enabled: debug.canPowerOff || debug.canReboot || debug.canSuspend || debug.canHibernate || debug.canHybridSleep
@@ -248,7 +248,7 @@ Rectangle
             x: 5
             y: areaBottom.height - height - 5
 
-            hasLeftSlice: false
+            skewLeft: 0
             text: "Caps Lock"
             highlighted: keyboard.capsLock
 
@@ -291,6 +291,7 @@ Rectangle
             SlicedButton
             {
                 id: buttonWeekday
+                enabled: false
                 x: 5
                 y: areaBottom.height - height - 5
 
@@ -306,6 +307,7 @@ Rectangle
             SlicedButton
             {
                 id: buttonDate
+                enabled: false
                 x: buttonWeekday.x + buttonWeekday.widthPartial + 3
                 y: areaBottom.height - height - 5
 
@@ -321,10 +323,11 @@ Rectangle
             SlicedButton
             {
                 id: buttonTime
+                enabled: false
                 x: buttonDate.x + buttonDate.widthPartial + 3
                 y: areaBottom.height - height - 5
 
-                hasRightSlice: false
+                skewRight: 0
 
                 function updateTime()
                 {

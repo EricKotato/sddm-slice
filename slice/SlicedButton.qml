@@ -15,15 +15,13 @@ Item
 
     property string text: ""
 
-    property bool hasLeftSlice: true
-    property bool hasRightSlice: true
-
     property bool highlighted: false
-    readonly property int skew: 15
+    property int skewLeft:  15
+    property int skewRight: 15
 
-    readonly property int paddingLeft: hasLeftSlice ? skew : 5
+    readonly property int paddingLeft: Math.max(Math.abs(skewLeft), 5)
     property int paddingTop: 3
-    readonly property int paddingRight: hasRightSlice ? skew : 5
+    readonly property int paddingRight: Math.max(Math.abs(skewRight), 5)
 
     readonly property int widthFull: buttonText.width + paddingLeft + paddingRight
     readonly property int widthPartial: buttonText.width + paddingLeft
@@ -50,8 +48,7 @@ Item
 
     onHighlightedChanged:
     {
-        buttonBgSliceLeft.requestPaint()
-        buttonBgSliceRight.requestPaint()
+        buttonBg.requestPaint()
     }
 
     onTextChanged:
@@ -67,19 +64,7 @@ Item
             name: "idle"
             PropertyChanges
             {
-                target: buttonBgSliceLeft;
-                bgColor: highlighted ? bgIdleHighlighted : bgIdle
-            }
-
-            PropertyChanges
-            {
-                target: buttonBgCenter;
-                color: highlighted ? bgIdleHighlighted : bgIdle
-            }
-
-            PropertyChanges
-            {
-                target: buttonBgSliceRight;
+                target: buttonBg;
                 bgColor: highlighted ? bgIdleHighlighted : bgIdle
             }
 
@@ -94,19 +79,7 @@ Item
             name: "hover"
             PropertyChanges
             {
-                target: buttonBgSliceLeft;
-                bgColor: highlighted ? bgHoverHighlighted : bgHover
-            }
-
-            PropertyChanges
-            {
-                target: buttonBgCenter;
-                color: highlighted ? bgHoverHighlighted : bgHover
-            }
-
-            PropertyChanges
-            {
-                target: buttonBgSliceRight;
+                target: buttonBg;
                 bgColor: highlighted ? bgHoverHighlighted : bgHover
             }
 
@@ -120,106 +93,62 @@ Item
 
     Canvas
     {
-        id: buttonBgSliceLeft
+        id: buttonBg
 
-        width: paddingLeft
+        width: widthFull
         height: parent.height
         property string bgColor: colors.buttonBg
 
         onPaint:
         {
-
-            var context = getContext("2d")
+            var context = getContext("2d");
             context.clearRect(0, 0, width, height);
             context.fillStyle = bgColor
-
             context.beginPath()
 
-            if (buttonRoot.hasLeftSlice)
-                context.moveTo(paddingLeft, 0)
-            else
-            {
-                context.moveTo(0, 0)
-                context.lineTo(paddingLeft, 0)
+            context.moveTo(paddingLeft, height);
+
+            if (skewLeft > 0) {
+                context.lineTo(0, height);
+                context.lineTo(skewLeft, 0);
+            } else if (skewLeft < 0) {
+                context.lineTo(Math.abs(skewLeft), height);
+                context.lineTo(0, 0);
+            } else {
+                context.lineTo(0, height);
+                context.lineTo(0, 0);
             }
 
-            context.lineTo(paddingLeft, height)
-            context.lineTo(0, height)
-            
+            context.lineTo(widthPartial, 0);
+
+            if (skewRight > 0) {
+                context.lineTo(width, 0);
+                context.lineTo(width-skewRight, height);
+            } else if (skewRight < 0) {
+                context.lineTo(width+skewRight, 0);
+                context.lineTo(width, height);
+            } else {
+                context.lineTo(width, 0);
+                context.lineTo(width, height);
+            }
+
+            context.lineTo(paddingLeft, height);
+
             context.closePath()
             context.fill()
         }
-
 
         Behavior on x
         {
             PropertyAnimation { duration: 100 }
         }
-    }
-
-    Rectangle
-    {
-        id: buttonBgCenter
-        color: colors.buttonBg
-        x: paddingLeft
-        width: buttonText.width
-        height: parent.height
 
         Behavior on width
         {
-            PropertyAnimation
-            {
-                duration: 100
-                onStopped:
-                {
-                    buttonRoot.showTextAnimation.start()
-                }
-            }
-        }
-
-
-        Behavior on x
-        {
             PropertyAnimation { duration: 100 }
         }
+
     }
-
-    Canvas
-    {
-        id: buttonBgSliceRight
-
-        x: widthPartial
-
-        width: paddingRight
-        height: parent.height
-        property string bgColor: colors.buttonBg
-
-        onPaint:
-        {
-            var context = getContext("2d")
-            context.clearRect(0, 0, paddingRight, height);
-            context.fillStyle = bgColor
-
-            context.beginPath()
-
-            context.moveTo(0, 0)
-            context.lineTo(paddingRight, 0)
-
-            if (!buttonRoot.hasRightSlice)
-                context.lineTo(paddingRight, height)
-            
-            context.lineTo(0, height)
-            
-            context.closePath()
-            context.fill()
-        }
-
-        Behavior on x
-        {
-            PropertyAnimation { duration: 100 }
-        }
-    }
-
 
     Text
     {
@@ -244,15 +173,13 @@ Item
         onEntered: 
         {
             buttonRoot.state = "hover"
-            buttonBgSliceLeft.requestPaint()
-            buttonBgSliceRight.requestPaint()
+            buttonBg.requestPaint()
         }
 
         onExited:
         {
             buttonRoot.state = "idle"
-            buttonBgSliceLeft.requestPaint()
-            buttonBgSliceRight.requestPaint()
+            buttonBg.requestPaint()
         }
 
         onClicked: buttonRoot.clicked()
