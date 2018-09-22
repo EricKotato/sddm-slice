@@ -5,6 +5,7 @@ Author=RadRussianRus
 Copyright=(c) 2018, RadRussianRus
 License=CC-BY-SA
 Type=sddm-theme
+Screenshot=screenshot.png
 Website=https://github.com/RadRussianRus/slice-sddm
 Version=1.0
 MainScript=Main.qml
