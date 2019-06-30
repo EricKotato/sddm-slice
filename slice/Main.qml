@@ -376,7 +376,7 @@ Rectangle
         }
     }
 
-    Keys.onTabPressed: {
+    function nextScreen() {
         switch(root.state)
         {
             case "statePower":
@@ -392,7 +392,8 @@ Rectangle
                 break;
         }
     }
-    Keys.onBacktabPressed: { 
+
+    function previousScreen() {
         switch(root.state)
         {
             case "statePower":
@@ -408,5 +409,10 @@ Rectangle
                 break;
         }
     }
+
+    Keys.onTabPressed: nextScreen()
+    Keys.onBacktabPressed: previousScreen()
+    Keys.onLeftPressed: previousScreen()
+    Keys.onRightPressed: nextScreen()
 }
 
