@@ -5,10 +5,11 @@ import SddmComponents 2.0
 Item
 {
     id: itemRoot
-    opacity: distance
-    scale: distance
+    opacity: computedDistance
+    scale: computedDistance
 
     property real distance: 1.0
+    readonly property real computedDistance: Math.sin(Math.PI / 2 * distance)
     property string sessionName: ""
     property bool hover: false
 

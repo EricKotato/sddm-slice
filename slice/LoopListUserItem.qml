@@ -5,7 +5,7 @@ import SddmComponents 2.0
 Item
 {
     id: itemRoot
-    opacity: distance
+    opacity: computedDistance
     width: parent.width
     height: userName == "" ? userLoginText.height + 14 : userNameText.height + userLoginText.height - 4
     
@@ -15,11 +15,12 @@ Item
     transform: Scale
     {
         origin.x: itemRoot.height + 12
-        xScale: distance
-        yScale: distance
+        xScale: computedDistance
+        yScale: computedDistance
     }
 
     property real distance: 1.0
+    readonly property real computedDistance: Math.sin(Math.PI / 2 * distance)
     property string userName: ""
     property string userLogin: ""
     property string userAvatar: "icons/no_avatar.svg"
