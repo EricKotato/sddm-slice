@@ -21,6 +21,7 @@ Create file `theme.conf.user` in theme folder. See `slice/theme.conf` for refere
 * `background` - path to background image. If not set, falls back to `color_bg`. Not set by default.
 * `bg_mode` - background image fill mode. Can be either `aspect`, `fill`, `tile` or `none`. Defaults to `aspect`.
 * `parallax_bg_shift` - shifting of parallax background on tab change in pixels. `0` disables parallax motion. Negative values will scroll background in opposite direction. Default is `20`.
+* `manual` - enables manual login mode and disables user selection. You can use "0/1", "true/false" and "yes/no" on this option. Disabled by default.
 
 ### Color scheme
 

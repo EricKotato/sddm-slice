@@ -157,6 +157,15 @@ Item
         capitalization: not_null(config.font_input_capitalize) ?    cap(config.font_input_capitalize) : inputGroup.capitalization
     });
 
+    property font loginInput: Qt.font({
+        family:                  config.font_login_input             ?        config.font_login_input             : inputGroup.family,
+        pointSize:               config.font_login_input_size        ? Number(config.font_login_input_size)       : inputGroup.pointSize,
+        bold:           not_null(config.font_login_input_bold)       ?   bool(config.font_login_input_bold)       : true,
+        italic:         not_null(config.font_login_input_italic)     ?   bool(config.font_login_input_italic)     : inputGroup.italic,
+        underline:      not_null(config.font_login_input_underline)  ?   bool(config.font_login_input_underline)  : inputGroup.underline,
+        capitalization: not_null(config.font_login_input_capitalize) ?    cap(config.font_login_input_capitalize) : inputGroup.capitalization
+    });
+
     property font placeholder: Qt.font({
         family:                  config.font_placeholder             ?        config.font_placeholder             : inputGroup.family,
         pointSize:               config.font_placeholder_size        ? Number(config.font_placeholder_size)       : inputGroup.pointSize,

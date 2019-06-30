@@ -10,6 +10,7 @@ Item
     property int scrollRepeat: 0
     property string currentUserLogin: get_login(0)
     property bool hasLoginShown: true
+    property bool manual: bool(config.manual)
 
     signal lockNav()
     signal unlockNav()
@@ -67,8 +68,12 @@ Item
 
     onFocusChanged:
     {
-        if (focus && hasLoginShown)
-            passwordField.forceActiveFocus()
+        if (focus && hasLoginShown) {
+            if (manual)
+                loginField.forceActiveFocus()
+            else
+                passwordField.forceActiveFocus()
+        }
     }
 
     Item
@@ -191,6 +196,7 @@ Item
             userName: get_name(0)
             userLogin: get_login(0)
             userAvatar: get_avatar(0)
+            visible: !manual
         }
 
         LoopListUserItem
@@ -223,124 +229,179 @@ Item
             userAvatar: get_avatar(3)
         }
 
-        Rectangle
-        {
-            id: passwordFieldBg
-            y: middleItem.y + middleItem.height + 2
+        Item {
+            id: loginControls
+            y: manual ? middleItem.y : middleItem.y + middleItem.height + 2
             width: parent.width
-            height: Math.max(fonts.input.pointSize, fonts.placeholder.pointSize) + 20
-            opacity: hasLoginShown ? 1 : 0
-            color: colors.inputBg
-        }
 
-        TextInput
-        {
-            id: passwordField
-            x: 10
-            y: (passwordFieldBg.height - height) / 2 + passwordFieldBg.y
-            width: parent.width - 20
-            opacity: hasLoginShown ? 1 : 0
-            color: colors.inputText
-            selectionColor: colors.inputSelectionBg
-            selectedTextColor: colors.inputSelectionText
+            Rectangle
+            {
+                id: loginFieldBg
+                y: 0
+                width: parent.width
+                height: Math.max(fonts.input.pointSize, fonts.placeholder.pointSize) + 20
+                opacity: hasLoginShown && manual ? 1 : 0
+                color: colors.inputBg
+            }
 
-            echoMode: TextInput.Password
-            clip: true
-            selectByMouse: true
-            
-            font: fonts.input
+            TextInput
+            {
+                id: loginField
+                x: 10
+                y: (loginFieldBg.height - height) / 2 + loginFieldBg.y
+                width: parent.width - 20
+                opacity: hasLoginShown && manual ? 1 : 0
+                color: colors.inputText
+                selectionColor: colors.inputSelectionBg
+                selectedTextColor: colors.inputSelectionText
 
-            Component.onCompleted: forceActiveFocus()
+                clip: true
+                selectByMouse: true
+                
+                font: fonts.loginInput
 
-        }
+                Component.onCompleted: if (manual) forceActiveFocus()
+                Keys.onTabPressed: passwordField.forceActiveFocus()
+            }
 
-        Text
-        {
-            id: passwordFieldPlaceholder
-            x: passwordField.x
-            y: (passwordFieldBg.height - height) / 2 + passwordFieldBg.y
-            width: passwordField.width
-            opacity: hasLoginShown ? 1 : 0
-            visible: passwordField.text.length <= 0
+            Text
+            {
+                id: loginFieldPlaceholder
+                x: loginField.x
+                y: (loginFieldBg.height - height) / 2 + loginFieldBg.y
+                width: loginField.width
+                opacity: hasLoginShown && manual ? 1 : 0
+                visible: loginField.text.length <= 0
 
-            color: colors.inputPlaceholderText
+                color: colors.inputPlaceholderText
 
-            font: fonts.placeholder
+                font: fonts.placeholder
 
-            text: localeText.password
-        }
+                text: localeText.userName
+            }
 
-        Rectangle
-        {
-            id: progressBar
-            y: passwordFieldBg.y + passwordFieldBg.height
-            width: parent.width
-            height: 2
-            opacity: hasLoginShown ? 1 : 0
-            color: colors.progressBar
-        }
+            Rectangle
+            {
+                id: passwordFieldBg
+                y: manual ? loginFieldBg.y + loginFieldBg.height + 2 : 0
+                width: parent.width
+                height: Math.max(fonts.input.pointSize, fonts.placeholder.pointSize) + 20
+                opacity: hasLoginShown ? 1 : 0
+                color: colors.inputBg
+            }
 
-        Rectangle
-        {
-            id: progressBarBg
-            y: progressBar.y
-            width: parent.width
-            height: 2
-            opacity: 0
-            color: colors.progressBarBg
-        }
+            TextInput
+            {
+                id: passwordField
+                x: 10
+                y: (passwordFieldBg.height - height) / 2 + passwordFieldBg.y
+                width: parent.width - 20
+                opacity: hasLoginShown ? 1 : 0
+                color: colors.inputText
+                selectionColor: colors.inputSelectionBg
+                selectedTextColor: colors.inputSelectionText
 
-        Rectangle
-        {
-            id: progressBarSlider1
-            x: 0
-            y: progressBar.y
-            width: parent.width / 5
-            height: 2
-            opacity: 0
-            color: colors.progressBarSlider
-        }
+                echoMode: TextInput.Password
+                clip: true
+                selectByMouse: true
+                
+                font: fonts.input
 
-        Rectangle
-        {
-            id: progressBarSlider2
-            x: parent.width
-            y: progressBar.y
-            width: 0
-            height: 2
-            opacity: 0
-            color: colors.progressBarSlider
-        }
+                Component.onCompleted: forceActiveFocus()
+                Keys.onBacktabPressed: { if (manual) loginField.forceActiveFocus(); else event.accepted = false; }
 
-        SlicedButton
-        {
-            id: buttonUserLogin
-            x: userListContainer.width - widthFull
-            y: progressBar.y + progressBar.height + 2
-            paddingTop: 2
-            highlighted: true
-            opacity: hasLoginShown ? 1 : 0
+            }
 
-            text: localeText.login
+            Text
+            {
+                id: passwordFieldPlaceholder
+                x: passwordField.x
+                y: (passwordFieldBg.height - height) / 2 + passwordFieldBg.y
+                width: passwordField.width
+                opacity: hasLoginShown ? 1 : 0
+                visible: passwordField.text.length <= 0
 
-            onClicked: select_or_login()
+                color: colors.inputPlaceholderText
 
-            font: fonts.slicesLoginButtons
-        }
+                font: fonts.placeholder
 
-        SlicedButton
-        {
-            id: buttonUserBack
-            x: userListContainer.width - widthFull - buttonUserLogin.widthPartial - 3
-            y: buttonUserLogin.y
-            paddingTop: 2
-            opacity: hasLoginShown ? 1 : 0
+                text: localeText.password
+            }
 
-            text: qsTr("Back")
+            Rectangle
+            {
+                id: progressBar
+                y: passwordFieldBg.y + passwordFieldBg.height
+                width: parent.width
+                height: 2
+                opacity: hasLoginShown ? 1 : 0
+                color: colors.progressBar
+            }
 
-            onClicked: back_to_selection()
+            Rectangle
+            {
+                id: progressBarBg
+                y: progressBar.y
+                width: parent.width
+                height: 2
+                opacity: 0
+                color: colors.progressBarBg
+            }
 
-            font: fonts.slicesLoginButtons
+            Rectangle
+            {
+                id: progressBarSlider1
+                x: 0
+                y: progressBar.y
+                width: parent.width / 5
+                height: 2
+                opacity: 0
+                color: colors.progressBarSlider
+            }
+
+            Rectangle
+            {
+                id: progressBarSlider2
+                x: parent.width
+                y: progressBar.y
+                width: 0
+                height: 2
+                opacity: 0
+                color: colors.progressBarSlider
+            }
+
+            SlicedButton
+            {
+                id: buttonUserLogin
+                x: userListContainer.width - widthFull
+                y: progressBar.y + progressBar.height + 2
+                paddingTop: 2
+                highlighted: true
+                opacity: hasLoginShown ? 1 : 0
+
+                text: localeText.login
+
+                onClicked: select_or_login()
+
+                font: fonts.slicesLoginButtons
+            }
+
+            SlicedButton
+            {
+                id: buttonUserBack
+                x: userListContainer.width - widthFull - buttonUserLogin.widthPartial - 3
+                y: buttonUserLogin.y
+                paddingTop: 2
+                opacity: hasLoginShown ? 1 : 0
+                visible: !manual
+
+                text: qsTr("Back")
+
+                onClicked: back_to_selection()
+
+                font: fonts.slicesLoginButtons
+            }
+
         }
 
         Rectangle
@@ -419,6 +480,9 @@ Item
 
             NumberAnimation { target: middleItem; property: "y"; to: pageRoot.height / 2.3 - (middleItem.height / 2 + passwordFieldBg.height + progressBar.height + 2 + buttonUserLogin.height) / 2; duration: userListContainer.scrollDuration }
 
+            NumberAnimation { target: loginField; property: "opacity"; to: 1; duration: userListContainer.scrollDuration }
+            NumberAnimation { target: loginFieldPlaceholder; property: "opacity"; to: 1; duration: userListContainer.scrollDuration }
+            NumberAnimation { target: loginFieldBg; property: "opacity"; to: 1; duration: userListContainer.scrollDuration }
             NumberAnimation { target: passwordField; property: "opacity"; to: 1; duration: userListContainer.scrollDuration }
             NumberAnimation { target: passwordFieldPlaceholder; property: "opacity"; to: 1; duration: userListContainer.scrollDuration }
             NumberAnimation { target: passwordFieldBg; property: "opacity"; to: 1; duration: userListContainer.scrollDuration }
@@ -443,6 +507,9 @@ Item
 
             NumberAnimation { target: middleItem; property: "y"; to: pageRoot.height / 2.3; duration: userListContainer.scrollDuration }
 
+            NumberAnimation { target: loginField; property: "opacity"; to: 0; duration: userListContainer.scrollDuration }
+            NumberAnimation { target: loginFieldPlaceholder; property: "opacity"; to: 0; duration: userListContainer.scrollDuration }
+            NumberAnimation { target: loginFieldBg; property: "opacity"; to: 0; duration: userListContainer.scrollDuration }
             NumberAnimation { target: passwordField; property: "opacity"; to: 0; duration: userListContainer.scrollDuration }
             NumberAnimation { target: passwordFieldPlaceholder; property: "opacity"; to: 0; duration: userListContainer.scrollDuration }
             NumberAnimation { target: passwordFieldBg; property: "opacity"; to: 0; duration: userListContainer.scrollDuration }
@@ -538,7 +605,7 @@ Item
             id: loginEnterAnimation
             NumberAnimation { target: passwordField; property: "opacity"; to: 0; duration: userListContainer.scrollDuration }
             NumberAnimation { target: passwordFieldBg; property: "height"; to: 0; duration: userListContainer.scrollDuration }
-            NumberAnimation { target: passwordFieldBg; property: "y"; to: pageRoot.height / 2.3 - (middleItem.height / 2 + progressBar.height + 2) / 2; duration: userListContainer.scrollDuration }
+            NumberAnimation { target: loginControls; property: "y"; to: pageRoot.height / 2.3 - (middleItem.height / 2 + progressBar.height + 2) / 2; duration: userListContainer.scrollDuration }
             NumberAnimation { target: passwordFieldPlaceholder; property: "opacity"; to: 0; duration: userListContainer.scrollDuration }
             NumberAnimation { target: buttonUserBack; property: "opacity"; to: 0; duration: userListContainer.scrollDuration }
             NumberAnimation { target: buttonUserLogin; property: "opacity"; to: 0; duration: userListContainer.scrollDuration }
@@ -555,7 +622,7 @@ Item
             id: loginExitAnimation
             NumberAnimation { target: passwordField; property: "opacity"; to: 1; duration: userListContainer.scrollDuration }
             NumberAnimation { target: passwordFieldBg; property: "height"; to: 40; duration: userListContainer.scrollDuration }
-            NumberAnimation { target: passwordFieldBg; property: "y"; to: pageRoot.height / 2.3 - (middleItem.height / 2 + passwordFieldBg.height + progressBar.height + 2 + buttonUserLogin.height) / 2; duration: userListContainer.scrollDuration }
+            NumberAnimation { target: loginControls; property: "y"; to: pageRoot.height / 2.3 - (middleItem.height / 2 + passwordFieldBg.height + progressBar.height + 2 + buttonUserLogin.height) / 2; duration: userListContainer.scrollDuration }
             NumberAnimation { target: passwordFieldPlaceholder; property: "opacity"; to: 1; duration: userListContainer.scrollDuration }
             NumberAnimation { target: buttonUserBack; property: "opacity"; to: 1; duration: userListContainer.scrollDuration }
             NumberAnimation { target: buttonUserLogin; property: "opacity"; to: 1; duration: userListContainer.scrollDuration }
@@ -621,10 +688,14 @@ Item
             loginEnterAnimation.start()
             if (debug.loginError)
                 loginTimeoutTimer.start()
-            else
-                sddm.login(currentUserLogin, passwordField.text, selectedSessionIndex)
+            else {
+                if (manual)
+                    sddm.login(loginField.text, passwordField.text, selectedSessionIndex)
+                else
+                    sddm.login(currentUserLogin, passwordField.text, selectedSessionIndex)
+            }
         }
-        else
+        else if (!manual)
         {
             topFarItem.hoverEnabled = false
             topMidItem.hoverEnabled = false
@@ -637,7 +708,7 @@ Item
 
     function back_to_selection()
     {
-        if (hasLoginShown)
+        if (hasLoginShown && !manual)
         {
             topFarItem.hoverEnabled = true
             topMidItem.hoverEnabled = true
@@ -657,10 +728,30 @@ Item
         onTriggered: sddm.onLoginFailed()
     }
 
-    Keys.onUpPressed: scroll_down()
-    Keys.onDownPressed: scroll_up()
-    Keys.onEnterPressed: select_or_login()
-    Keys.onReturnPressed: select_or_login()
+    Keys.onUpPressed: {
+        if (manual && hasLoginShown && passwordField.activeFocus) {
+            loginField.forceActiveFocus()
+        } else
+            scroll_down()
+    }
+    Keys.onDownPressed: {
+        if (manual && hasLoginShown && loginField.activeFocus) {
+            passwordField.forceActiveFocus()
+        } else
+            scroll_up()
+    }
+    Keys.onEnterPressed: {
+        if (hasLoginShown && !passwordField.activeFocus)
+            passwordField.forceActiveFocus()
+        else
+            select_or_login()
+    }
+    Keys.onReturnPressed: {
+        if (hasLoginShown && !passwordField.activeFocus)
+            passwordField.forceActiveFocus()
+        else
+            select_or_login()
+    }
     Keys.onEscapePressed: back_to_selection()
     
 }
