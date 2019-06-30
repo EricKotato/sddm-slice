@@ -2,12 +2,12 @@
 Name=Slice
 Description=Simple SDDM theme.
 Author=RadRussianRus
-Copyright=(c) 2018, RadRussianRus
+Copyright=(c) 2019, RadRussianRus
 License=CC-BY-SA
 Type=sddm-theme
 Screenshot=screenshot.png
 Website=https://github.com/RadRussianRus/slice-sddm
-Version=1.4
+Version=1.5
 MainScript=Main.qml
 TranslationsDirectory=translations
 ConfigFile=theme.conf
