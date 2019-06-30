@@ -350,14 +350,14 @@ Rectangle
             switch (root.state)
             {
                 case "statePower":
-                    if (wheel.pixelDelta.y < 0)
+                    if (wheel.angleDelta.y < 0)
                         pagePower.scroll_up()
                     else
                         pagePower.scroll_down()
                     break
 
                 case "stateSessions":
-                    if (wheel.pixelDelta.y < 0)
+                    if (wheel.angleDelta.y < 0)
                         pageSessions.scroll_up()
                     else
                         pageSessions.scroll_down()
@@ -366,7 +366,7 @@ Rectangle
                 case "stateUsers":
                     if (!pageUsers.hasLoginShown)
                     {
-                        if (wheel.pixelDelta.y < 0)
+                        if (wheel.angleDelta.y < 0)
                             pageUsers.scroll_up()
                         else
                             pageUsers.scroll_down()
