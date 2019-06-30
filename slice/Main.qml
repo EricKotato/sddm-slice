@@ -257,6 +257,12 @@ Rectangle
             y: areaBottom.height - height - 5
 
             text: keyboard.layouts[keyboard.currentLayout].longName
+            onClicked: {
+                var newId = keyboard.currentLayout+1;
+                if (newId >= keyboard.layouts.length)
+                    newId = 0;
+                keyboard.currentLayout = newId;
+            }
 
             font: fonts.slicesBottomLeft
         }
