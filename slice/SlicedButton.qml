@@ -3,7 +3,7 @@ import QtQuick 2.7
 Item
 {
     id: buttonRoot
-    height: paddingTop * 2 + buttonText.height
+    height: paddingTop + paddingBottom + buttonText.height
 
     property font font: Qt.font({
         family: config.font,
@@ -16,15 +16,28 @@ Item
     property string text: ""
 
     property bool highlighted: false
-    property int skewLeft:  15
-    property int skewRight: 15
+    
+    property int skew:          sizes.skewSlices
+    property int skewLeft:      skew
+    property int skewRight:     skew
+    
+    property int paddingTop:    sizes.paddingTopSlices
+    property int paddingBottom: sizes.paddingBottomSlices
+    property int paddingLeft:   sizes.paddingLeftSlices
+    property int paddingRight:  sizes.paddingRightSlices
+    
+    
+    readonly property int skewSizeLeft: Math.round(height * Math.abs(skewLeft)/45)
+    readonly property int skewSizeRight: Math.round(height * Math.abs(skewRight)/45)
+    
+    readonly property int skewPaddingLeft: Math.max(skewSizeLeft, 5)
+    readonly property int skewPaddingRight: Math.max(skewSizeRight, 5)
 
-    readonly property int paddingLeft: Math.max(Math.abs(skewLeft), 5)
-    property int paddingTop: 3
-    readonly property int paddingRight: Math.max(Math.abs(skewRight), 5)
+    readonly property int totalPaddingLeft: skewPaddingLeft + paddingLeft
+    readonly property int totalPaddingRight: skewPaddingRight + paddingRight
 
-    readonly property int widthFull: buttonText.width + paddingLeft + paddingRight
-    readonly property int widthPartial: buttonText.width + paddingLeft
+    readonly property int widthFull: buttonText.width + totalPaddingLeft + totalPaddingRight
+    readonly property int widthPartial: buttonText.width + totalPaddingLeft + paddingRight + (skewPaddingRight - skewSizeRight)
 
     property color bgIdle: colors.buttonBg
     property color bgHover: colors.buttonBgHover
@@ -37,7 +50,6 @@ Item
 
     property color textIdleHighlighted: colors.buttonTextHighlighted
     property color textHoverHighlighted: colors.buttonTextHoverHighlighted
-
 
     signal clicked()
 
@@ -106,13 +118,13 @@ Item
             context.fillStyle = bgColor
             context.beginPath()
 
-            context.moveTo(paddingLeft, height);
+            context.moveTo(totalPaddingLeft, height);
 
             if (skewLeft > 0) {
                 context.lineTo(0, height);
-                context.lineTo(skewLeft, 0);
+                context.lineTo(skewSizeLeft, 0);
             } else if (skewLeft < 0) {
-                context.lineTo(Math.abs(skewLeft), height);
+                context.lineTo(skewSizeLeft, height);
                 context.lineTo(0, 0);
             } else {
                 context.lineTo(0, height);
@@ -123,16 +135,16 @@ Item
 
             if (skewRight > 0) {
                 context.lineTo(width, 0);
-                context.lineTo(width-skewRight, height);
+                context.lineTo(width-skewSizeRight, height);
             } else if (skewRight < 0) {
-                context.lineTo(width+skewRight, 0);
+                context.lineTo(width-skewSizeRight, 0);
                 context.lineTo(width, height);
             } else {
                 context.lineTo(width, 0);
                 context.lineTo(width, height);
             }
 
-            context.lineTo(paddingLeft, height);
+            context.lineTo(totalPaddingLeft, height);
 
             context.closePath()
             context.fill()
@@ -153,7 +165,7 @@ Item
     Text
     {
         id: buttonText
-        x: paddingLeft
+        x: totalPaddingLeft
         y: paddingTop
         color: colors.buttonText
 

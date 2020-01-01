@@ -302,6 +302,7 @@ Item
                 selectedTextColor: colors.inputSelectionText
 
                 echoMode: TextInput.Password
+                passwordCharacter: config.password_character ? config.password_character : false
                 clip: true
                 selectByMouse: true
                 
@@ -373,9 +374,12 @@ Item
             SlicedButton
             {
                 id: buttonUserLogin
-                x: userListContainer.width - widthFull
-                y: progressBar.y + progressBar.height + 2
-                paddingTop: 2
+                x: userListContainer.width - widthFull - sizes.offsetHorizontalSlicesLoginButtons
+                y: progressBar.y + progressBar.height + sizes.offsetVerticalSlicesLoginButtons
+                
+                skewLeft: sizes.skewSlicesLoginButtons
+                skewRight: sizes.skewSlicesLoginButtons
+            
                 highlighted: true
                 opacity: hasLoginShown ? 1 : 0
 
@@ -384,14 +388,22 @@ Item
                 onClicked: select_or_login()
 
                 font: fonts.slicesLoginButtons
+                
+                paddingLeft: sizes.paddingLeftSlicesLoginButtons
+                paddingRight: sizes.paddingRightSlicesLoginButtons
+                paddingTop: sizes.paddingTopSlicesLoginButtons
+                paddingBottom: sizes.paddingBottomSlicesLoginButtons
             }
 
             SlicedButton
             {
                 id: buttonUserBack
-                x: userListContainer.width - widthFull - buttonUserLogin.widthPartial - 3
+                x: userListContainer.width - widthFull - buttonUserLogin.widthPartial - sizes.spacingSlicesLoginButtons - sizes.offsetHorizontalSlicesLoginButtons
                 y: buttonUserLogin.y
-                paddingTop: 2
+                
+                skewLeft: sizes.skewSlicesLoginButtons
+                skewRight: sizes.skewSlicesLoginButtons
+                
                 opacity: hasLoginShown ? 1 : 0
                 visible: !manual
 
@@ -400,6 +412,11 @@ Item
                 onClicked: back_to_selection()
 
                 font: fonts.slicesLoginButtons
+                
+                paddingLeft: sizes.paddingLeftSlicesLoginButtons
+                paddingRight: sizes.paddingRightSlicesLoginButtons
+                paddingTop: sizes.paddingTopSlicesLoginButtons
+                paddingBottom: sizes.paddingBottomSlicesLoginButtons
             }
 
         }
