@@ -4,17 +4,21 @@ Simple dark SDDM theme with many customization options.
 
 [![Theme preview (YouTube)](https://user-images.githubusercontent.com/2903496/45325970-142dd700-b55b-11e8-8396-dc6aba6282e5.png)](https://youtu.be/X6lXkBwo--s)
 
-## Installing
+## Install from KDE system settings
+
+If you're using KDE, you can install theme from `System Settings > Startup and Shutdown > Login Screen (SDDM)`. You can download this repo as zip and install with `Install From File...`, or you can find it in `Get New Login Screens...` window.
+
+## Manual install
 
 1. Install `Qt Graphical Effects` QML module
 2. Install Roboto font (optional, you can change to other font, [see below](#font-scheme))
 3. `git clone https://github.com/RadRussianRus/sddm-slice.git`
-4. `cp -r sddm-slice/slice /usr/share/sddm/themes/slice`
-5. Open `/etc/sddm.conf` and put `Current=slice` in `[Theme]` section
+4. `cp -r sddm-slice /usr/share/sddm/themes/sddm-slice`
+5. Open `/etc/sddm.conf` and put `Current=sddm-slice` in `[Theme]` section
 
 ## Configuration
 
-Create file `theme.conf.user` in theme folder. See `slice/theme.conf` for reference. Also sample configs can be found [in wiki](https://github.com/RadRussianRus/sddm-slice/wiki#sample-configs).
+Create file `theme.conf.user` in theme folder. See `theme.conf` for reference. Also sample configs can be found [in wiki](https://github.com/RadRussianRus/sddm-slice/wiki#sample-configs).
 
 ### Base options
 

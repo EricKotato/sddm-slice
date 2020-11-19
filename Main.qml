@@ -2,6 +2,8 @@ import QtQuick 2.7
 import QtGraphicalEffects 1.0
 import SddmComponents 2.0
 
+import "slice"
+
 Rectangle
 {
     id: root
