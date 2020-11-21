@@ -9,6 +9,7 @@ Rectangle
     id: root
     color: colors.background
     property variant geometry: screenModel.geometry(screenModel.primary)
+    //property bool virtualkeyboard: bool(config.virtualkeyboard)
 
     state: "stateUsers"
     states:
@@ -200,11 +201,23 @@ Rectangle
             id: pageUsers
             width: areaMain.width
             height: areaMain.height
+            y: inputPanel.visible && inputPanel.y != areaMain.height + areaBottom.height ? -150 : 0
 
             Behavior on x { NumberAnimation { duration: 150 } }
+            Behavior on y { NumberAnimation { duration: 150 } }
 
             onLockNav: areaTop.enabled = false
             onUnlockNav: areaTop.enabled = true
+        }
+
+        Loader {
+            id: inputPanel
+            source: "slice/VirtualKeyboard.qml"
+            width: areaMain.width
+            y: areaMain.height - 350 - areaBottom.height
+            Behavior on y { NumberAnimation { duration: 150 } }
+            //visible: virtualkeyboard
+            visible: false
         }
     }
 
