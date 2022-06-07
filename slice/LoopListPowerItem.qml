@@ -7,15 +7,25 @@ Item
     opacity: distance
     property int duration: 100
     width: parent.width
+    height: descriptionLabel.height + textBoxPaddingBottom + textBoxPaddingTop
+
     property bool hover: false
+
+    property int textBoxPaddingTop: sizes.paddingTopItemPower
+    property int textBoxPaddingLeft: sizes.paddingLeftItemPower
+    property int textBoxPaddingBottom: sizes.paddingBottomItemPower
+    property int textBoxPaddingRight: sizes.paddingRightItemPower
+
+    property int imagePadding: sizes.imagePaddingItemPower
+    property int textBoxMargin: sizes.spacingItemPower
 
     signal clicked()
     signal entered()
 
     transform: Scale
     {
-        origin.x: descriptionLabel.height + 10 + 2
-        origin.y: descriptionLabel.height + 10 / 2
+        origin.x: itemRoot.height + textBoxMargin
+        origin.y: itemRoot.height / 2
         xScale: distance
         yScale: distance
     }
@@ -28,11 +38,13 @@ Item
     property real distance: 1.0
     property string icon: "icons/no_avatar.svg"
     property string title: ""
+    readonly property int imageWidth: itemRoot.height - (imagePadding * 2)
+
 
     Rectangle
     {
-        width: descriptionLabel.height + 10
-        height: descriptionLabel.height + 10
+        width: itemRoot.height
+        height: itemRoot.height
         color: ( hover ? colors.iconBgHover : colors.iconBg )
     }
 
@@ -40,10 +52,10 @@ Item
     {
         id: powerItemIcon
         source: icon
-        sourceSize.width: descriptionLabel.height + 10 - 4
-        sourceSize.height: descriptionLabel.height + 10 - 4
-        x: 2
-        y: 2
+        sourceSize.width: imageWidth
+        sourceSize.height: imageWidth
+        x: imagePadding
+        y: imagePadding
         opacity: 0
     }
 
@@ -58,9 +70,9 @@ Item
 
     Rectangle
     {
-        x: descriptionLabel.height + 10 + 2
-        width: parent.width - descriptionLabel.height + 10 - 2
-        height: descriptionLabel.height + 10
+        x: itemRoot.width + textBoxMargin
+        width: parent.width - x
+        height: itemRoot.height
         color: ( hover ? colors.textBgHover : colors.textBg )
     }
 
