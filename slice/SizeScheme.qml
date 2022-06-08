@@ -19,13 +19,15 @@ Item
     *  Defaults / Fallbacks
     *
     * * * * * * * * * * * * * * * * * */
-    property int defaultSkewSlices:   32
-    property int defaultPaddingSlices: 0
-    property int defaultSpacingSlices: 3
-    property int defaultOffsetSlices:  5
-    property int defaultSpacingItem:   2
-    property int defaultPaddingItem:   2
-    property int defaultImagePadding:  2
+    property int defaultSkewSlices:      32
+    property int defaultPaddingSlices:    0
+    property int defaultSpacingSlices:    3
+    property int defaultOffsetSlices:     5
+    property int defaultSpacingItem:      2
+    property int defaultPaddingItem:      2
+    property int defaultImagePadding:     2
+	property int defaultUserAreaWidth:  450
+	property int defaultPowerAreaWidth: 370
 
 
     /* * * * * * * * * * * * * * * * * *
@@ -38,12 +40,12 @@ Item
     property int userAreaWidth:
     {
         if (not_null(config.user_area_width)) return config.user_area_width
-        else                                  return 450
+        else                                  return defaultUserAreaWidth
     }
     property int powerAreaWidth:
     {
         if (not_null(config.power_area_width)) return config.power_area_width
-        else                                   return 370
+        else                                   return defaultPowerAreaWidth
     }
     // Offset
     property int offsetSlices:
