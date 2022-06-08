@@ -45,15 +45,15 @@ There are also many font options, so there is now [font scheme](https://github.c
 * `font` - overall font. Defaults to `Roboto`.
 
 ### Layout Sheme
-* `user_area_width` - set the width of the user page container area
-* `power_area_width` - set the width of the power spage container area
-* `offset_slices` - set the vertical and horizontal offset for all groups of buttons (or "slices")
-* `padding_slices` - set the internal padding of all slices
-* `spacing_slices` - set the spacing between all slices
-* `skew_slices` - set the skew (angle) of all slices
-* `image_padding` - set the image padding for all images
-* `spacing_item` - set the spacing between all types of list item
-* `padding_item` - set the internal padding of all types of list item
+* `user_area_width` - width of the user page container area
+* `power_area_width` - width of the power spage container area
+* `offset_slices` - vertical and horizontal offset for all groups of buttons (or "slices")
+* `padding_slices` - internal padding of all slices
+* `spacing_slices` - spacing between all slices
+* `skew_slices` - skew (angle) of all slices
+* `image_padding` - image padding for all images
+* `spacing_item` - spacing between all types of list item
+* `padding_item` - internal padding of all types of list item
 
 Info about other layers can be found on wiki: [layer 2](https://github.com/RadRussianRus/sddm-slice/wiki/Font-Scheme-Layer-2), [layer 3](https://github.com/RadRussianRus/sddm-slice/wiki/Font-Scheme-Layer-3).
 
