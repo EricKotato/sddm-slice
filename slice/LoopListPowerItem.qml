@@ -70,7 +70,8 @@ Item
 
     Rectangle
     {
-        x: itemRoot.width + textBoxMargin
+        id: textBackground
+        x: itemRoot.height + textBoxMargin
         width: parent.width - x
         height: itemRoot.height
         color: ( hover ? colors.textBgHover : colors.textBg )
@@ -81,19 +82,19 @@ Item
         id: descriptionLabel
         text: itemRoot.title
         color: ( hover ? colors.textHover : colors.text )
-        width: parent.width - descriptionLabel.height + 10 - 2 - 24
+        width: parent.width - x - textBoxPaddingRight
 
         font: fonts.listItemMed
         elide: Text.ElideRight
 
-        x: descriptionLabel.height + 10 + 12
-        y: 5
+        x: textBackground.x + textBoxPaddingLeft
+        y: textBoxPaddingTop
     }
 
     MouseArea
     {
-        width: descriptionLabel.x + descriptionLabel.width
-        height: descriptionLabel.height + 10
+        width: itemRoot.width
+        height: itemRoot.height
         hoverEnabled: true
 
         onClicked: itemRoot.clicked()
