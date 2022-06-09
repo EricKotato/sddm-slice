@@ -44,18 +44,23 @@ There are also many font options, so there is now [font scheme](https://github.c
 
 * `font` - overall font. Defaults to `Roboto`.
 
-### Layout Sheme
-* `user_area_width` - width of the user page container area. Defaults to 450.
-* `power_area_width` - width of the power spage container area. Defaults to 370.
-* `offset_slices` - vertical and horizontal offset for all groups of buttons (or "slices"). Defaults to 5.
-* `padding_slices` - internal padding of all slices. Defaults to 0.
-* `spacing_slices` - spacing between all slices. Defaults to 3.
-* `skew_slices` - skew (angle) of all slices. Defaults to 32.
-* `image_padding` - image padding for all images. Defaults to 2.
-* `spacing_item` - spacing between all types of list item. Defaults to 2.
-* `padding_item` - internal padding of all types of list item. Defaults to 2.
-
 Info about other layers can be found on wiki: [layer 2](https://github.com/RadRussianRus/sddm-slice/wiki/Font-Scheme-Layer-2), [layer 3](https://github.com/RadRussianRus/sddm-slice/wiki/Font-Scheme-Layer-3).
+
+### Size scheme
+
+With [recent pull request](https://github.com/RadRussianRus/sddm-slice/pull/9) which introduced the [size scheme](https://github.com/RadRussianRus/sddm-slice/wiki/Size-Scheme) it is now possible to change the sizes and paddings of various elements. Most of them are optional, only mandatory option is from [layer 1](https://github.com/RadRussianRus/sddm-slice/wiki/Size-Scheme-Layer-1):
+
+* `user_area_width` - width of the user page container area. Defaults to `450`.
+* `power_area_width` - width of the power page container area. Defaults to `370`.
+* `offset_slices` - vertical and horizontal offset for all groups of buttons (or "slices"). Defaults to `5`.
+* `padding_slices` - internal padding of all slices. Defaults to `0`.
+* `spacing_slices` - spacing between all slices. Defaults to `3`.
+* `skew_slices` - skew (angle) of all slices. Defaults to `32`.
+* `image_padding` - image padding for all images. Defaults to `2`.
+* `spacing_item` - spacing between all types of list item. Defaults to `2`.
+* `padding_item` - internal padding of all types of list item. Defaults to `2`.
+
+Info about other layers can be found on wiki: [layer 2](https://github.com/RadRussianRus/sddm-slice/wiki/Size-Scheme-Layer-2), [layer 3](https://github.com/RadRussianRus/sddm-slice/wiki/Size-Scheme-Layer-3).
 
 ### Debug mode options
 
