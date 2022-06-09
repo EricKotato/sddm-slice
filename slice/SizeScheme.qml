@@ -15,86 +15,33 @@ Item
 
     /* * * * * * * * * * * * * * * * * *
     *
-    *  Layer 0 options
-    *  Defaults / Fallbacks
-    *
-    * * * * * * * * * * * * * * * * * */
-    property int defaultSkewSlices:      32
-    property int defaultPaddingSlices:    0
-    property int defaultSpacingSlices:    3
-    property int defaultOffsetSlices:     5
-    property int defaultSpacingItem:      2
-    property int defaultPaddingItem:      2
-    property int defaultImagePadding:     2
-	property int defaultUserAreaWidth:  450
-	property int defaultPowerAreaWidth: 370
-
-
-    /* * * * * * * * * * * * * * * * * *
-    *
     *  Layer 1 options
-    *  Base values
+    *  Base values, Required
     *
     * * * * * * * * * * * * * * * * * */
 
-    property int userAreaWidth:
-    {
-        if (not_null(config.user_area_width)) return config.user_area_width
-        else                                  return defaultUserAreaWidth
-    }
-    property int powerAreaWidth:
-    {
-        if (not_null(config.power_area_width)) return config.power_area_width
-        else                                   return defaultPowerAreaWidth
-    }
+    property int userAreaWidth: config.user_area_width
+    property int powerAreaWidth: config.power_area_width
     // Offset
-    property int offsetSlices:
-    {
-        if (not_null(config.offset_slices)) return config.offset_slices
-        else                                return defaultOffsetSlices
-    }
+    property int offsetSlices: config.offset_slices
 
     // Padding
-    property int paddingSlices:
-    {
-        if (not_null(config.padding_slices)) return config.padding_slices
-        else                                 return defaultPaddingSlices
-    }
+    property int paddingSlices: config.padding_slices
 
     // Spacing
-    property int spacingSlices:
-    {
-        if (not_null(config.spacing_slices)) return config.spacing_slices
-        else                                 return defaultSpacingSlices
-    }
+    property int spacingSlices: config.spacing_slices
 
     // Skew
-    property int skewSlices:
-    {
-        if (not_null(config.skew_slices)) return config.skew_slices
-        else                              return defaultSkewSlices
-    }
+    property int skewSlices: config.skew_slices
 
     // Image padding
-    property int imagePadding:
-    {
-        if (not_null(config.image_padding)) return config.image_padding
-        else                                return defaultImagePadding
-    }
+    property int imagePadding: config.image_padding
 
     // LoopList item spacing
-    property int spacingItem:
-    {
-        if (not_null(config.spacing_item)) return config.spacing_item
-        else                               return defaultSpacingItem
-    }
+    property int spacingItem: config.spacing_item
 
     // LoopList item padding
-    property int paddingItem:
-    {
-        if (not_null(config.padding_item)) return config.padding_item
-        else                               return defaultPaddingItem
-    }
+    property int paddingItem: config.padding_item
 
 
     /* * * * * * * * * * * * * * * * * *
