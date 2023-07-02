@@ -13,12 +13,17 @@ Item
     property string sessionName: ""
     property bool hover: false
 
+    property int textBoxPaddingLeft: sizes.paddingLeftItemSession
+    property int textBoxPaddingRight: sizes.paddingRightItemSession
+    property int textBoxPaddingTop: sizes.paddingTopItemSession
+    property int textBoxPaddingBottom: sizes.paddingBottomItemSession
+
     Rectangle
     {
-        x: sessionNameLabel.x - 10
-        y: sessionNameLabel.y - 5
-        width: sessionNameLabel.width + 20
-        height: sessionNameLabel.height + 10
+        x: sessionNameLabel.x - textBoxPaddingLeft
+        y: sessionNameLabel.y - textBoxPaddingTop
+        width: sessionNameLabel.width + textBoxPaddingLeft + textBoxPaddingRight
+        height: sessionNameLabel.height + textBoxPaddingBottom + textBoxPaddingTop
         color: ( hover ? colors.textBgHover : colors.textBg )
     }
 
@@ -31,7 +36,7 @@ Item
 
         font: fonts.listItemMed
 
-        x: parent.x + 10
-        y: 5
+        x: parent.x + textBoxPaddingLeft
+        y: textBoxPaddingTop
     }
 }

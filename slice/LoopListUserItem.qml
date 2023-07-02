@@ -7,8 +7,8 @@ Item
     id: itemRoot
     opacity: computedDistance
     width: parent.width
-    height: userName == "" ? userLoginText.height + 14 : userNameText.height + userLoginText.height - 4
-    
+    height: loginIsMain ? userLoginText.height + 14 : userNameText.height + userLoginText.height - 4
+
     property bool hover: false
     property bool hoverEnabled: true
 
@@ -25,8 +25,22 @@ Item
     property string userLogin: ""
     property string userAvatar: "icons/no_avatar.svg"
 
+    property int imagePadding: sizes.imagePaddingItemUser
+    property int textBoxMargin: sizes.spacingItemUser
+    property int subHeadOffset: sizes.offsetSubHeadItemUser
+    property int lowerCaseOffset: sizes.offsetLowerCaseItemUser
+    property int textBoxPaddingTop: sizes.paddingTopItemUser
+    property int textBoxPaddingLeft: sizes.paddingLeftItemUser
+    property int textBoxPaddingBottom: sizes.paddingBottomItemUser
+    property int textBoxPaddingRight: sizes.paddingRightItemUser
+
+    property int minHeight: 64 + (imagePadding * 2)
+    readonly property int imageSize: itemRoot.height - (imagePadding * 2)
+    readonly property bool loginIsMain: userName == ""
+
     Rectangle
     {
+        id: iconBackground
         width: itemRoot.height
         height: itemRoot.height
         color: ( hoverEnabled && hover ? colors.iconBgHover : colors.iconBg )
@@ -36,17 +50,19 @@ Item
     {
         id: profilePicture
         source: userAvatar
-        sourceSize.width: itemRoot.height - 8
-        sourceSize.height: itemRoot.height - 8
-        x: 4
-        y: 4
+        sourceSize.width: imageSize
+        sourceSize.height: imageSize
+        x: iconBackground.x + imagePadding
+        y: imagePadding
+
     }
 
     Rectangle
     {
-        x: itemRoot.height + 2
+        id: textBackground
+        x: iconBackground.x + iconBackground.width + textBoxMargin
         y: 0
-        width: parent.width - itemRoot.height - 2
+        width: parent.width - x
         height: itemRoot.height
         color: ( hoverEnabled && hover ? colors.textBgHover : colors.textBg )
     }
@@ -56,28 +72,29 @@ Item
         id: userNameText
         text: userName
         color: ( hoverEnabled && hover ? colors.textHover : colors.text )
-        
+
         font: fonts.listItemMed
 
         elide: Text.ElideRight
 
-        x: itemRoot.height + 12
-        y: 0
+        x: textBackground.x + textBoxPaddingLeft
+        y: textBackground.y + textBoxPaddingTop
 
-        width: itemRoot.width - itemRoot.height - 26
+        width: textBackground.width - textBoxPaddingLeft - textBoxPaddingRight
     }
 
     Text
     {
         id: userLoginText
         text: userLogin
-        color: ( hoverEnabled && hover ? (userName == "" ? colors.textHover : colors.textDimmedHover ) : (userName == "" ? colors.text : colors.textDimmed ) )
-        y: userName == "" ? 7 : userNameText.height * 0.8
-        font: userName == "" ? fonts.listItemBig : fonts.listItemSub
-        x: itemRoot.height + 12
+        color: ( hoverEnabled && hover ? (loginIsMain ? colors.textHover : colors.textDimmedHover ) : (loginIsMain ? colors.text : colors.textDimmed ) )
+        font: loginIsMain ? fonts.listItemBig : fonts.listItemSub
+
+        y: userNameText.y + (loginIsMain ? lowerCaseOffset : (userNameText.height + subHeadOffset))
+        x: userNameText.x
 
         elide: Text.ElideRight
 
-        width: itemRoot.width - itemRoot.height - 26
+        width: userNameText.width
     }
 }

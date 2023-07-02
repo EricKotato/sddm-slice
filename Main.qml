@@ -17,7 +17,7 @@ Rectangle
         State
         {
             name: "statePower"
-            
+
             PropertyChanges { target: background; x: (config.parallax_bg_shift < 0 ? geometry.x - Math.abs(config.parallax_bg_shift*2) : geometry.x ) }
 
             PropertyChanges { target: pagePower;    enabled: true ; focus: true ; x: 0 }
@@ -112,6 +112,7 @@ Rectangle
         Behavior on x { NumberAnimation { duration: 150 } }
     }
 
+    SizeScheme { id: sizes }
     ColorScheme { id: colors }
     FontScheme { id: fonts }
 
@@ -121,15 +122,17 @@ Rectangle
         x: 0
         y: 0
         width: root.width
-        height: Math.max(buttonPagePower.height, buttonPageSessions.height, buttonPageUsers.height) + 10
+        height: Math.max(buttonPagePower.height, buttonPageSessions.height, buttonPageUsers.height) + sizes.offsetVerticalSlicesTop + 5
 
         SlicedButton
         {
             id: buttonPagePower
-            x: 5
-            y: 5
+            x: sizes.offsetHorizontalSlicesTop
+            y: sizes.offsetVerticalSlicesTop
 
+            skewRight: sizes.skewSlicesTop
             skewLeft: 0
+
             text: debug.hostName ? debug.hostName : "Hostname"
 
             enabled: debug.canPowerOff || debug.canReboot || debug.canSuspend || debug.canHibernate || debug.canHybridSleep
@@ -137,32 +140,53 @@ Rectangle
             onClicked: if (enabled) root.state = "statePower"
 
             font: fonts.slicesTop
+
+            paddingLeft: sizes.paddingLeftSlicesTop
+            paddingRight: sizes.paddingRightSlicesTop
+            paddingTop: sizes.paddingTopSlicesTop
+            paddingBottom: sizes.paddingBottomSlicesTop
         }
 
         SlicedButton
         {
             id: buttonPageSessions
-            x: buttonPagePower.x + buttonPagePower.widthPartial + 3
-            y: 5
+            x: buttonPagePower.x + buttonPagePower.widthPartial + sizes.spacingSlicesTop
+            y: sizes.offsetVerticalSlicesTop
+
+            skewLeft: sizes.skewSlicesTop
+            skewRight: sizes.skewSlicesTop
 
             text: pageSessions.currentSessionName
 
             onClicked: root.state = "stateSessions"
 
             font: fonts.slicesTop
+
+            paddingLeft: sizes.paddingLeftSlicesTop
+            paddingRight: sizes.paddingRightSlicesTop
+            paddingTop: sizes.paddingTopSlicesTop
+            paddingBottom: sizes.paddingBottomSlicesTop
         }
 
         SlicedButton
         {
             id: buttonPageUsers
-            x: buttonPagePower.x + buttonPagePower.widthPartial + buttonPageSessions.widthPartial + 6
-            y: 5
+            x: buttonPagePower.x + buttonPagePower.widthPartial + buttonPageSessions.widthPartial + ( sizes.spacingSlicesTop * 2 )
+            y: sizes.offsetVerticalSlicesTop
+
+            skewLeft: sizes.skewSlicesTop
+            skewRight: sizes.skewSlicesTop
 
             text: pageUsers.currentUserLogin
 
             onClicked: root.state = "stateUsers"
 
             font: fonts.slicesTop
+
+            paddingLeft: sizes.paddingLeftSlicesTop
+            paddingRight: sizes.paddingRightSlicesTop
+            paddingTop: sizes.paddingTopSlicesTop
+            paddingBottom: sizes.paddingBottomSlicesTop
         }
     }
 
@@ -239,23 +263,34 @@ Rectangle
         SlicedButton
         {
             id: buttonCapsLock
-            x: 5
-            y: areaBottom.height - height - 5
+            x: sizes.offsetHorizontalSlicesBottomLeft
+            y: areaBottom.height - height - sizes.offsetVerticalSlicesBottomLeft
+
 
             skewLeft: 0
+            skewRight: sizes.skewSlicesBottomLeft
+
             text: "Caps Lock"
             highlighted: keyboard.capsLock
 
             onClicked: keyboard.capsLock = !keyboard.capsLock
 
             font: fonts.slicesBottomLeft
+
+            paddingLeft: sizes.paddingLeftSlicesBottomLeft
+            paddingRight: sizes.paddingRightSlicesBottomLeft
+            paddingTop: sizes.paddingTopSlicesBottomLeft
+            paddingBottom: sizes.paddingBottomSlicesBottomLeft
         }
 
         SlicedButton
         {
             id: buttonNumLock
-            x: buttonCapsLock.x + buttonCapsLock.widthPartial + 3
-            y: areaBottom.height - height - 5
+            x: buttonCapsLock.x + buttonCapsLock.widthPartial + sizes.spacingSlicesBottomLeft
+            y: areaBottom.height - height - sizes.offsetVerticalSlicesBottomLeft
+
+            skewLeft: sizes.skewSlicesBottomLeft
+            skewRight: sizes.skewSlicesBottomLeft
 
             text: "Num Lock"
             highlighted: keyboard.numLock
@@ -263,13 +298,21 @@ Rectangle
             onClicked: keyboard.numLock = !keyboard.numLock
 
             font: fonts.slicesBottomLeft
+
+            paddingLeft: sizes.paddingLeftSlicesBottomLeft
+            paddingRight: sizes.paddingRightSlicesBottomLeft
+            paddingTop: sizes.paddingTopSlicesBottomLeft
+            paddingBottom: sizes.paddingBottomSlicesBottomLeft
         }
 
         SlicedButton
         {
             id: buttonKeyboardLayout
-            x: buttonNumLock.x + buttonNumLock.widthPartial + 3
-            y: areaBottom.height - height - 5
+            x: buttonNumLock.x + buttonNumLock.widthPartial + sizes.spacingSlicesBottomLeft
+            y: areaBottom.height - height - sizes.offsetVerticalSlicesBottomLeft
+
+            skewLeft: sizes.skewSlicesBottomLeft
+            skewRight: sizes.skewSlicesBottomLeft
 
             text: keyboard.layouts[keyboard.currentLayout].longName
             onClicked: {
@@ -280,20 +323,32 @@ Rectangle
             }
 
             font: fonts.slicesBottomLeft
+
+            paddingLeft: sizes.paddingLeftSlicesBottomLeft
+            paddingRight: sizes.paddingRightSlicesBottomLeft
+            paddingTop: sizes.paddingTopSlicesBottomLeft
+            paddingBottom: sizes.paddingBottomSlicesBottomLeft
         }
 
         Item
         {
             id: dateTimeArea
-            x: areaBottom.width - width
-            width: buttonWeekday.widthPartial + buttonDate.widthPartial + buttonTime.widthPartial + 21
+            x: areaBottom.width - width - sizes.offsetHorizontalSlicesBottomRight
+            width:
+                buttonWeekday.widthPartial +
+                buttonDate.widthPartial +
+                buttonTime.widthFull +
+                ( sizes.spacingSlicesBottomRight * 2 )
 
             SlicedButton
             {
                 id: buttonWeekday
                 enabled: false
-                x: 5
-                y: areaBottom.height - height - 5
+                x: 0
+                y: areaBottom.height - height - sizes.offsetVerticalSlicesBottomRight
+
+                skewLeft: sizes.skewSlicesBottomRight
+                skewRight: sizes.skewSlicesBottomRight
 
                 function updateTime()
                 {
@@ -302,14 +357,22 @@ Rectangle
                 }
 
                 font: fonts.slicesBottomRight
+
+                paddingLeft: sizes.paddingLeftSlicesBottomRight
+                paddingRight: sizes.paddingRightSlicesBottomRight
+                paddingTop: sizes.paddingTopSlicesBottomRight
+                paddingBottom: sizes.paddingBottomSlicesBottomRight
             }
 
             SlicedButton
             {
                 id: buttonDate
                 enabled: false
-                x: buttonWeekday.x + buttonWeekday.widthPartial + 3
-                y: areaBottom.height - height - 5
+                x: buttonWeekday.x + buttonWeekday.widthPartial + sizes.spacingSlicesBottomRight
+                y: areaBottom.height - height - sizes.offsetVerticalSlicesBottomRight
+
+                skewLeft: sizes.skewSlicesBottomRight
+                skewRight: sizes.skewSlicesBottomRight
 
                 function updateTime()
                 {
@@ -318,15 +381,21 @@ Rectangle
                 }
 
                 font: fonts.slicesBottomRight
+
+                paddingLeft: sizes.paddingLeftSlicesBottomRight
+                paddingRight: sizes.paddingRightSlicesBottomRight
+                paddingTop: sizes.paddingTopSlicesBottomRight
+                paddingBottom: sizes.paddingBottomSlicesBottomRight
             }
 
             SlicedButton
             {
                 id: buttonTime
                 enabled: false
-                x: buttonDate.x + buttonDate.widthPartial + 3
-                y: areaBottom.height - height - 5
+                x: buttonDate.x + buttonDate.widthPartial + sizes.spacingSlicesBottomRight
+                y: areaBottom.height - height - sizes.offsetVerticalSlicesBottomRight
 
+                skewLeft: sizes.skewSlicesBottomRight
                 skewRight: 0
 
                 function updateTime()
@@ -336,6 +405,11 @@ Rectangle
                 }
 
                 font: fonts.slicesBottomRight
+
+                paddingLeft: sizes.paddingLeftSlicesBottomRight
+                paddingRight: sizes.paddingRightSlicesBottomRight
+                paddingTop: sizes.paddingTopSlicesBottomRight
+                paddingBottom: sizes.paddingBottomSlicesBottomRight
             }
         }
 
@@ -436,4 +510,3 @@ Rectangle
     Keys.onLeftPressed: previousScreen()
     Keys.onRightPressed: nextScreen()
 }
-
