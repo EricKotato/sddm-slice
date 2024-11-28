@@ -12,13 +12,13 @@ If you're using KDE, you can install theme from `System Settings > Startup and S
 
 1. Install `Qt Graphical Effects` QML module
 2. Install Roboto font (optional, you can change to other font, [see below](#font-scheme))
-3. `git clone https://github.com/RadRussianRus/sddm-slice.git`
+3. `git clone https://github.com/EricKotato/sddm-slice.git`
 4. `cp -r sddm-slice /usr/share/sddm/themes/sddm-slice`
 5. Open `/etc/sddm.conf` and put `Current=sddm-slice` in `[Theme]` section
 
 ## Configuration
 
-Create file `theme.conf.user` in theme folder. See `theme.conf` for reference. Also sample configs can be found [in wiki](https://github.com/RadRussianRus/sddm-slice/wiki#sample-configs).
+Create file `theme.conf.user` in theme folder. See `theme.conf` for reference. Also sample configs can be found [in wiki](https://github.com/EricKotato/sddm-slice/wiki#sample-configs).
 
 ### Base options
 
@@ -29,22 +29,22 @@ Create file `theme.conf.user` in theme folder. See `theme.conf` for reference. A
 
 ### Color scheme
 
-There are many color options. In fact, too many. So now they are grouped by layers in [color scheme](https://github.com/RadRussianRus/sddm-slice/wiki/Color-Scheme). Most of them are optional, only mandatory options are from [layer 1](https://github.com/RadRussianRus/sddm-slice/wiki/Color-Scheme-Layer-1):
+There are many color options. In fact, too many. So now they are grouped by layers in [color scheme](https://github.com/EricKotato/sddm-slice/wiki/Color-Scheme). Most of them are optional, only mandatory options are from [layer 1](https://github.com/EricKotato/sddm-slice/wiki/Color-Scheme-Layer-1):
 
 * `color_bg` - background color. Defaults to `#222222`.
 * `color_main` - main color. Defaults to `#dddddd`.
 * `color_dimmed` - dimmed main color. Defaults to `#888888`.
 * `color_contrast` - color that contrasting to both main and dimmed. Defaults to `#1f1f1f`.
 
-Info about other layers can be found on wiki: [layer 2](https://github.com/RadRussianRus/sddm-slice/wiki/Color-Scheme-Layer-2), [layer 3](https://github.com/RadRussianRus/sddm-slice/wiki/Color-Scheme-Layer-3).
+Info about other layers can be found on wiki: [layer 2](https://github.com/EricKotato/sddm-slice/wiki/Color-Scheme-Layer-2), [layer 3](https://github.com/EricKotato/sddm-slice/wiki/Color-Scheme-Layer-3).
 
 ### Font scheme
 
-There are also many font options, so there is now [font scheme](https://github.com/RadRussianRus/sddm-slice/wiki/Font-Scheme) too. Most of them are optional, only mandatory option is from [layer 1](https://github.com/RadRussianRus/sddm-slice/wiki/Font-Scheme-Layer-1):
+There are also many font options, so there is now [font scheme](https://github.com/EricKotato/sddm-slice/wiki/Font-Scheme) too. Most of them are optional, only mandatory option is from [layer 1](https://github.com/EricKotato/sddm-slice/wiki/Font-Scheme-Layer-1):
 
 * `font` - overall font. Defaults to `Roboto`.
 
-Info about other layers can be found on wiki: [layer 2](https://github.com/RadRussianRus/sddm-slice/wiki/Font-Scheme-Layer-2), [layer 3](https://github.com/RadRussianRus/sddm-slice/wiki/Font-Scheme-Layer-3).
+Info about other layers can be found on wiki: [layer 2](https://github.com/EricKotato/sddm-slice/wiki/Font-Scheme-Layer-2), [layer 3](https://github.com/EricKotato/sddm-slice/wiki/Font-Scheme-Layer-3).
 
 ### Debug mode options
 
