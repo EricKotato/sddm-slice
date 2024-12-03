@@ -63,7 +63,7 @@ Item
             pageRoot.unlockNav()
             loginExitAnimation.start()
             passwordField.text = ""
-        } 
+        }
     }
 
     onFocusChanged:
@@ -80,7 +80,7 @@ Item
     {
         id: userListContainer
         anchors.horizontalCenter: parent.horizontalCenter
-        width: 450
+        width: sizes.userAreaWidth
 
         property int scrollDuration: 100
 
@@ -125,7 +125,7 @@ Item
             height: pageRoot.height / 4
             //enabled: !hasLoginShown
 
-            onClicked: { (hasLoginShown ? back_to_selection() : select_or_login()) } 
+            onClicked: { (hasLoginShown ? back_to_selection() : select_or_login()) }
 
         }
 
@@ -257,7 +257,7 @@ Item
 
                 clip: true
                 selectByMouse: true
-                
+
                 font: fonts.loginInput
 
                 Component.onCompleted: if (manual) forceActiveFocus()
@@ -304,7 +304,7 @@ Item
                 echoMode: TextInput.Password
                 clip: true
                 selectByMouse: true
-                
+
                 font: fonts.input
 
                 Component.onCompleted: forceActiveFocus()
@@ -373,9 +373,12 @@ Item
             SlicedButton
             {
                 id: buttonUserLogin
-                x: userListContainer.width - widthFull
-                y: progressBar.y + progressBar.height + 2
-                paddingTop: 2
+                x: userListContainer.width - widthFull - sizes.offsetHorizontalSlicesLoginButtons
+                y: progressBar.y + progressBar.height + sizes.offsetVerticalSlicesLoginButtons
+
+                skewLeft: sizes.skewSlicesLoginButtons
+                skewRight: sizes.skewSlicesLoginButtons
+
                 highlighted: true
                 opacity: hasLoginShown ? 1 : 0
 
@@ -384,14 +387,22 @@ Item
                 onClicked: select_or_login()
 
                 font: fonts.slicesLoginButtons
+
+                paddingLeft: sizes.paddingLeftSlicesLoginButtons
+                paddingRight: sizes.paddingRightSlicesLoginButtons
+                paddingTop: sizes.paddingTopSlicesLoginButtons
+                paddingBottom: sizes.paddingBottomSlicesLoginButtons
             }
 
             SlicedButton
             {
                 id: buttonUserBack
-                x: userListContainer.width - widthFull - buttonUserLogin.widthPartial - 3
+                x: userListContainer.width - widthFull - buttonUserLogin.widthPartial - sizes.spacingSlicesLoginButtons - sizes.offsetHorizontalSlicesLoginButtons
                 y: buttonUserLogin.y
-                paddingTop: 2
+
+                skewLeft: sizes.skewSlicesLoginButtons
+                skewRight: sizes.skewSlicesLoginButtons
+
                 opacity: hasLoginShown ? 1 : 0
                 visible: !manual
 
@@ -400,6 +411,11 @@ Item
                 onClicked: back_to_selection()
 
                 font: fonts.slicesLoginButtons
+
+                paddingLeft: sizes.paddingLeftSlicesLoginButtons
+                paddingRight: sizes.paddingRightSlicesLoginButtons
+                paddingTop: sizes.paddingTopSlicesLoginButtons
+                paddingBottom: sizes.paddingBottomSlicesLoginButtons
             }
 
         }
@@ -461,7 +477,7 @@ Item
                 }
             }
 
-            onStopped: 
+            onStopped:
             {
                 progressBarSlider1.x = 0
                 progressBarSlider1.width = userListContainer.width / 5
@@ -490,7 +506,7 @@ Item
             NumberAnimation { target: buttonUserBack; property: "opacity"; to: 1; duration: userListContainer.scrollDuration }
             NumberAnimation { target: buttonUserLogin; property: "opacity"; to: 1; duration: userListContainer.scrollDuration }
 
-            onStopped: 
+            onStopped:
             {
                 hasLoginShown = true
                 passwordField.forceActiveFocus()
@@ -529,7 +545,7 @@ Item
             id: userListScrollUp
             NumberAnimation { target: topFarItem; property: "y"; to: 0; duration: userListContainer.scrollDuration }
             NumberAnimation { target: topFarItem; property: "distance"; to: 0; duration: userListContainer.scrollDuration }
-            
+
             NumberAnimation { target: topMidItem; property: "y"; to: pageRoot.height / 18; duration: userListContainer.scrollDuration }
             NumberAnimation { target: topMidItem; property: "distance"; to: 0.4; duration: userListContainer.scrollDuration }
 
@@ -570,7 +586,7 @@ Item
 
             NumberAnimation { target: topFarItem; property: "y"; to: pageRoot.height / 4.7; duration: userListContainer.scrollDuration }
             NumberAnimation { target: topFarItem; property: "distance"; to: 0.7; duration: userListContainer.scrollDuration }
-            
+
             NumberAnimation { target: topMidItem; property: "y"; to: pageRoot.height / 2.3; duration: userListContainer.scrollDuration }
             NumberAnimation { target: topMidItem; property: "distance"; to: 1; duration: userListContainer.scrollDuration }
 
@@ -589,7 +605,7 @@ Item
                     selectedIndex = userModel.count - 1
                 else
                     selectedIndex--
-                
+
                 reset_items()
 
                 if (scrollRepeat > 0)
@@ -753,5 +769,5 @@ Item
             select_or_login()
     }
     Keys.onEscapePressed: back_to_selection()
-    
+
 }
