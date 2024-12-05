@@ -3,7 +3,7 @@ import QtQuick 2.7
 Item
 {
     id: buttonRoot
-    height: paddingTop * 2 + buttonText.height
+    height: paddingTop + paddingBottom + buttonText.height
 
     property font font: Qt.font({
         family: config.font,
@@ -16,15 +16,28 @@ Item
     property string text: ""
 
     property bool highlighted: false
-    property int skewLeft:  15
-    property int skewRight: 15
 
-    readonly property int paddingLeft: Math.max(Math.abs(skewLeft), 5)
-    property int paddingTop: 3
-    readonly property int paddingRight: Math.max(Math.abs(skewRight), 5)
+    property int skew:          sizes.skewSlices
+    property int skewLeft:      skew
+    property int skewRight:     skew
+    property int defaultSkewPadding: 5
 
-    readonly property int widthFull: buttonText.width + paddingLeft + paddingRight
-    readonly property int widthPartial: buttonText.width + paddingLeft
+    property int paddingTop:    sizes.paddingTopSlices
+    property int paddingBottom: sizes.paddingBottomSlices
+    property int paddingLeft:   sizes.paddingLeftSlices
+    property int paddingRight:  sizes.paddingRightSlices
+
+    readonly property int baseWidth: buttonText.width + paddingLeft + paddingRight
+    readonly property int baseHeight: buttonText.height
+
+    readonly property int skewSizeLeft: Math.round(baseHeight * Math.abs(skewLeft)/45)
+    readonly property int skewSizeRight: Math.round(baseHeight * Math.abs(skewRight)/45)
+
+    readonly property int skewPaddingLeft: Math.max(skewSizeLeft, defaultSkewPadding)
+    readonly property int skewPaddingRight: Math.max(skewSizeRight, defaultSkewPadding)
+
+    readonly property int widthFull: baseWidth + skewPaddingLeft + skewPaddingRight
+    readonly property int widthPartial: baseWidth + skewPaddingLeft + (skewPaddingRight - skewSizeRight)
 
     property color bgIdle: colors.buttonBg
     property color bgHover: colors.buttonBgHover
@@ -103,16 +116,15 @@ Item
         {
             var context = getContext("2d");
             context.clearRect(0, 0, width, height);
-            context.fillStyle = bgColor
-            context.beginPath()
+            context.fillStyle = bgColor;
+            context.beginPath();
 
-            context.moveTo(paddingLeft, height);
+            context.moveTo(skewPaddingLeft, height);
 
             if (skewLeft > 0) {
                 context.lineTo(0, height);
-                context.lineTo(skewLeft, 0);
+                context.lineTo(skewPaddingLeft, 0);
             } else if (skewLeft < 0) {
-                context.lineTo(Math.abs(skewLeft), height);
                 context.lineTo(0, 0);
             } else {
                 context.lineTo(0, height);
@@ -123,19 +135,18 @@ Item
 
             if (skewRight > 0) {
                 context.lineTo(width, 0);
-                context.lineTo(width-skewRight, height);
+                context.lineTo(widthPartial, height);
             } else if (skewRight < 0) {
-                context.lineTo(width+skewRight, 0);
                 context.lineTo(width, height);
             } else {
                 context.lineTo(width, 0);
                 context.lineTo(width, height);
             }
 
-            context.lineTo(paddingLeft, height);
+            context.lineTo(skewPaddingLeft, height);
 
-            context.closePath()
-            context.fill()
+            context.closePath();
+            context.fill();
         }
 
         Behavior on x
@@ -153,7 +164,7 @@ Item
     Text
     {
         id: buttonText
-        x: paddingLeft
+        x: paddingLeft + skewPaddingLeft
         y: paddingTop
         color: colors.buttonText
 
@@ -170,7 +181,7 @@ Item
         cursorShape: Qt.PointingHandCursor
         hoverEnabled: true
 
-        onEntered: 
+        onEntered:
         {
             buttonRoot.state = "hover"
             buttonBg.requestPaint()
